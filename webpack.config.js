@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: ['babel-polyfill', './app/src/index.js'],
+    entry: ['./app/src/index.js'],
     output: {
         publicPath: '/'
     },
@@ -15,14 +15,6 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
-            },
-            {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: "html-loader"
-                    }
-                ]
             }
         ]
     },

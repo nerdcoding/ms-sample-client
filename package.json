@@ -26,6 +26,7 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "es6-promise-promise": "^1.0.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",

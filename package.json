@@ -9,13 +9,22 @@
     "url": "git+https://github.com/nerdcoding/ms-sample-client.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server ./dist -p 3000",
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --open --mode development --port 3000"
   },
-  "dependencies": {
+  "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "copy-webpack-plugin": "^5.0.3",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
   }
 }

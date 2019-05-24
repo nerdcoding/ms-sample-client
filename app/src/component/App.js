@@ -1,5 +1,5 @@
 /*
- * index.js
+ * App.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,11 +18,11 @@
 
 'use strict';
 
-import ReactDOM from "react-dom";
 import React from "react";
-import App from "./component/App";
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('main')
-);
+export default function App() {
+    const value = 4711;
+    return (
+        <div>{value}</div>
+    );
+}

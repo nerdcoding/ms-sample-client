@@ -1,0 +1,19 @@
+{
+  "name": "ms-sample-client",
+  "version": "1.0.0",
+  "description": "The client (GUI) for the microservice sample application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nerdcoding/ms-sample-client.git"
+  },
+  "author": "Tobias Koltsch",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/nerdcoding/ms-sample-client/issues"
+  },
+  "homepage": "https://github.com/nerdcoding/ms-sample-client#readme"
+}

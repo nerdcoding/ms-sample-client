@@ -1,6 +1,6 @@
 {
   "name": "ms-sample-client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The client (GUI) for the microservice sample application.",
   "author": "Tobias Koltsch",
   "license": "GPL-2.0-only",

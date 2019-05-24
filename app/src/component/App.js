@@ -21,7 +21,7 @@
 import React from "react";
 
 export default function App() {
-    const value = 4711;
+    const value = process.env.AUTH_SERVER_URL;
     return (
         <div>{value}</div>
     );

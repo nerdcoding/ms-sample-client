@@ -19,17 +19,16 @@
 'use strict';
 
 
-import {AUTH_SERVER_PASSWORD, AUTH_SERVER_URL, AUTH_SERVER_USER} from "../constants";
 import * as axios from "axios";
 
 /**
  * Axios based REST client to call endpoints of the authorization server.
  */
 const callAuthServer = axios.create({
-    baseURL: AUTH_SERVER_URL,
+    baseURL: process.env.AUTH_SERVER_URL,
     auth: {
-        username: AUTH_SERVER_USER,
-        password: AUTH_SERVER_PASSWORD
+        username: process.env.AUTH_SERVER_USER,
+        password: process.env.AUTH_SERVER_PASSWORD
     },
     timeout: 5000
 });

@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     },
     logo: {
         fontFamily: ['Rouge Script', 'sans-serif'],
-        fontSize: 70,
+        fontSize: 60,
         fontWeight: 500,
         textDecoration: 'none !important',
         height: 60,

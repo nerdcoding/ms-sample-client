@@ -19,10 +19,36 @@
 'use strict';
 
 import React from "react";
+import {BrowserRouter} from "react-router-dom";
+
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+
+import {MuiPickersUtilsProvider} from "material-ui-pickers";
+import MomentUtils from "@date-io/moment";
+
+import theme from "./../theme";
+import AppReducer from "../reducer/AppReducer";
+import Header from "./container/Header";
+
+const store = createStore(AppReducer);
+console.log(store.getState());
 
 export default function App() {
-    const value = process.env.AUTH_SERVER_URL;
     return (
-        <div>{value}</div>
+        <MuiThemeProvider theme={theme}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+                <Provider store={store}>
+                    <CssBaseline />
+
+                    <BrowserRouter>
+                        <Header />
+                    </BrowserRouter>
+                </Provider>
+            </MuiPickersUtilsProvider>
+        </MuiThemeProvider>
     );
 }

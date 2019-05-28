@@ -33,6 +33,7 @@ import MomentUtils from "@date-io/moment";
 import theme from "./../theme";
 import AppReducer from "../reducer/AppReducer";
 import Header from "./container/Header";
+import MainLayout from "./presentational/MainLayout";
 
 const store = createStore(AppReducer);
 console.log(store.getState());
@@ -46,6 +47,7 @@ export default function App() {
 
                     <BrowserRouter>
                         <Header />
+                        <MainLayout />
                     </BrowserRouter>
                 </Provider>
             </MuiPickersUtilsProvider>

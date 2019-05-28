@@ -43,6 +43,12 @@ const theme = createMuiTheme({
             contrastText: "#fff"
         },
         success: '#66bb6a'
+    },
+    customLayout: {
+        section: {
+            paddingTop: '60px',
+            paddingBottom: '60px',
+        }
     }
 });
 

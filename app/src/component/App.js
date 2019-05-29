@@ -21,7 +21,7 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 
-import {createStore} from "redux";
+import {compose, createStore} from "redux";
 import {Provider} from "react-redux";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -33,10 +33,19 @@ import MomentUtils from "@date-io/moment";
 import theme from "./../theme";
 import AppReducer from "../reducer/AppReducer";
 import Header from "./container/Header";
+import DevTools from './container/DevTools';
 import MainLayout from "./presentational/MainLayout";
 
-const store = createStore(AppReducer);
-console.log(store.getState());
+let store;
+if (process.env.ENVIRONMENT === 'dev') {
+    const storeEnhancer = compose(
+        //applyMiddleware(d1, d2, d3),
+        DevTools.instrument()
+    );
+    store = createStore(AppReducer, {}, storeEnhancer)
+} else {
+    store = createStore(AppReducer)
+}
 
 export default function App() {
     return (
@@ -48,6 +57,7 @@ export default function App() {
                     <BrowserRouter>
                         <Header />
                         <MainLayout />
+                        <DevTools />
                     </BrowserRouter>
                 </Provider>
             </MuiPickersUtilsProvider>

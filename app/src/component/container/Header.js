@@ -22,6 +22,7 @@ import {connect} from "react-redux";
 
 import NavigationBar from "../presentational/header/NavigationBar";
 import {toggleMobileMenu} from "../../action/HeaderAction";
+import {toggleLoginRegisterDialog, switchLoginRegisterDialogTab} from "../../action/LoginRegisterAction";
 
 const mapStateToProps = state => ({
     header: state.header
@@ -30,6 +31,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     openMobileMenu: anchorEL => dispatch(toggleMobileMenu(anchorEL)),
     closeMobileMenu: () => dispatch(toggleMobileMenu(null)),
+    toggleLoginRegisterDialog: isOpen => dispatch(toggleLoginRegisterDialog(isOpen)),
+    switchLoginRegisterDialogTab: selectedTab => dispatch(switchLoginRegisterDialogTab(selectedTab)),
 });
 
 

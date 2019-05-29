@@ -1,5 +1,5 @@
 /*
- * HeaderReducer.js
+ * LoginFOrm.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,23 +18,14 @@
 
 'use strict';
 
-import {TOGGLE_MOBILE_MENU} from "../action/HeaderAction";
+import * as React from "react";
 
-const initialHeaderState = {
-    mobileMenuAnchorEL: null
+const LoginForm = () => {
+    return (
+        <div>
+            <p>LoginForm</p>
+        </div>
+    )
 };
 
-const header = (state=initialHeaderState, action) => {
-    switch (action.type) {
-        case TOGGLE_MOBILE_MENU:
-            return {
-                ...state,
-                mobileMenuAnchorEL: action.mobileMenuAnchorEL
-            };
-        default:
-            return state;
-    }
-
-};
-
-export default header;
+export default LoginForm;

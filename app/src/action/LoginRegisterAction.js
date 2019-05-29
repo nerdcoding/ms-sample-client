@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * LoginRegisterAction.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,9 +18,19 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import header from "./header/HeaderReducer";
+export const TOGGLE_LOGIN_REGISTER_DIALOG = 'TOGGLE_LOGIN_REGISTER_DIALOG';
+export const SWITCH_LOGIN_REGISTER_DIALOG_TAB = 'SWITCH_LOGIN_REGISTER_DIALOG_TAB';
 
-export default combineReducers({
-    header,
-});
+export const toggleLoginRegisterDialog = (isOpen) => {
+    return {
+        type: TOGGLE_LOGIN_REGISTER_DIALOG,
+        isOpen
+    }
+};
+
+export const switchLoginRegisterDialogTab = (selectedTab) => {
+    return {
+        type: SWITCH_LOGIN_REGISTER_DIALOG_TAB,
+        selectedTab
+    }
+};

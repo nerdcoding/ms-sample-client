@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * HeaderReducer.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,9 +18,28 @@
 
 'use strict';
 
+import {TOGGLE_MOBILE_MENU} from "../../action/HeaderAction";
+import loginRegisterDialog from "./LoginRegisterReducer";
 import {combineReducers} from "redux";
-import header from "./header/HeaderReducer";
+
+const initialHeaderState = {
+    mobileMenuAnchorEL: null
+};
+
+const header = (state=initialHeaderState, action) => {
+    switch (action.type) {
+        case TOGGLE_MOBILE_MENU:
+            return {
+                ...state,
+                mobileMenuAnchorEL: action.mobileMenuAnchorEL
+            };
+        default:
+            return state;
+    }
+
+};
 
 export default combineReducers({
     header,
+    loginRegisterDialog
 });

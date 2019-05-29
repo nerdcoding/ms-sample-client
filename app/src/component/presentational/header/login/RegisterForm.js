@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * LoginFOrm.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,9 +18,14 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import header from "./header/HeaderReducer";
+import * as React from "react";
 
-export default combineReducers({
-    header,
-});
+const RegisterForm = () => {
+    return (
+        <div>
+            <p>RegisterForm</p>
+        </div>
+    )
+};
+
+export default RegisterForm;

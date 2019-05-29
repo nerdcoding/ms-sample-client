@@ -26,6 +26,7 @@ import {AppBar, Toolbar, Typography, Button, IconButton} from "@material-ui/core
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import MobileMenu from "./MobileMenu";
+import LoginRegisterDialog from "./login/LoginRegisterDialog";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -68,7 +69,8 @@ const useStyles = makeStyles(theme => ({
 /**
  * Renders the navbar (AppBar) on the top of the screen containing all router buttons.
  */
-const NavigationBar = ({header, openMobileMenu, closeMobileMenu}) => {
+const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
+        toggleLoginRegisterDialog, switchLoginRegisterDialogTab}) => {
     const classes = useStyles();
     return(
         <div className={classes.root}>
@@ -106,6 +108,21 @@ const NavigationBar = ({header, openMobileMenu, closeMobileMenu}) => {
                             <MoreIcon/>
                         </IconButton>
                     </div>
+
+
+                    <Button className={classes.button}
+                            variant='contained'
+                            size='small'
+                            color='secondary'
+                            onClick={() => toggleLoginRegisterDialog(header.loginRegisterDialog.isOpen)} >
+                        Login / Register
+                    </Button>
+
+                    <LoginRegisterDialog isOpen={header.loginRegisterDialog.isOpen}
+                                         selectedTab={header.loginRegisterDialog.selectedTab}
+                                         handleDialogToggle={toggleLoginRegisterDialog}
+                                         handleTabSwitch={switchLoginRegisterDialogTab}
+                    />
                 </Toolbar>
             </AppBar>
 

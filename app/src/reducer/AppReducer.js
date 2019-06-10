@@ -20,16 +20,11 @@
 
 import {combineReducers} from "redux";
 import {mobileMenuAnchorEL} from "./header/HeaderReducer";
-import {loginFormReducer} from "./header/login/LoginFormReducer";
-import {isOpenReducer,  selectedTabReducer} from "./header/login/LoginRegisterReducer";
+import {loginRegisterDialogReducer} from "./header/login/LoginRegisterDialogReducer";
 
 export default combineReducers({
     header: combineReducers({
         mobileMenuAnchorEL,
-        loginRegisterDialog: combineReducers({
-            isOpen: isOpenReducer,
-            selectedTab: selectedTabReducer,
-            loginForm: loginFormReducer
-        })
+        loginRegisterDialog: loginRegisterDialogReducer
     })
 });

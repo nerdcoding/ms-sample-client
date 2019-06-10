@@ -19,19 +19,12 @@
 'use strict';
 
 import {TOGGLE_MOBILE_MENU} from "../../action/HeaderAction";
-import loginRegisterDialog from "./LoginRegisterReducer";
-import {combineReducers} from "redux";
 
-const mobileMenuAnchorEL = (state=null, action) => {
-    switch (action.type) {
-        case TOGGLE_MOBILE_MENU:
-            return action.mobileMenuAnchorEL;
-        default:
-            return state;
+
+export const mobileMenuAnchorEL = (state=null, action) => {
+    if (action.type === TOGGLE_MOBILE_MENU) {
+        return action.mobileMenuAnchorEL;
     }
-};
 
-export default combineReducers({
-    mobileMenuAnchorEL,
-    loginRegisterDialog
-});
+    return state;
+};

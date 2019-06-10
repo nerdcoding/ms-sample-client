@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * LoginFormAction.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,18 +18,18 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import {mobileMenuAnchorEL} from "./header/HeaderReducer";
-import {loginFormReducer} from "./header/login/LoginFormReducer";
-import {isOpenReducer,  selectedTabReducer} from "./header/login/LoginRegisterReducer";
+export const CHANGE_EMAIL_FIELD = 'CHANGE_EMAIL_FIELD';
+export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
 
-export default combineReducers({
-    header: combineReducers({
-        mobileMenuAnchorEL,
-        loginRegisterDialog: combineReducers({
-            isOpen: isOpenReducer,
-            selectedTab: selectedTabReducer,
-            loginForm: loginFormReducer
-        })
-    })
-});
+export const changeEmailField = (emailField, newValue) => {
+    return {
+        type: CHANGE_EMAIL_FIELD,
+        emailField: {
+            value: newValue,
+            valid: emailField.valid,
+            validationRequired: emailField.validationRequired,
+            errorMessage: emailField.errorMessage,
+            name: 'email'
+        }
+    }
+};

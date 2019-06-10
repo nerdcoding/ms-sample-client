@@ -18,28 +18,20 @@
 
 'use strict';
 
-import {TOGGLE_LOGIN_REGISTER_DIALOG, SWITCH_LOGIN_REGISTER_DIALOG_TAB} from "../../action/LoginRegisterAction";
+import {TOGGLE_LOGIN_REGISTER_DIALOG, SWITCH_LOGIN_REGISTER_DIALOG_TAB} from "../../../action/LoginRegisterAction";
 
-const initialHeaderState = {
-    isOpen: false,
-    selectedTab: 0
-};
-
-const loginRegisterDialog = (state=initialHeaderState, action) => {
-    switch (action.type) {
-        case TOGGLE_LOGIN_REGISTER_DIALOG:
-            return {
-                ...state,
-                isOpen: !action.isOpen
-            };
-        case SWITCH_LOGIN_REGISTER_DIALOG_TAB:
-            return {
-                ...state,
-                selectedTab: action.selectedTab
-            };
-        default:
-            return state;
+export const isOpenReducer = (state=false, action) => {
+    if (action.type === TOGGLE_LOGIN_REGISTER_DIALOG) {
+        return !action.isOpen;
     }
+
+    return state;
 };
 
-export default loginRegisterDialog;
+export const selectedTabReducer = (state=0, action) => {
+    if (action.type === SWITCH_LOGIN_REGISTER_DIALOG_TAB) {
+        return action.selectedTab;
+    }
+
+    return state;
+};

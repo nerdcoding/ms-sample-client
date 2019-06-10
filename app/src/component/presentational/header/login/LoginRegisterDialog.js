@@ -19,6 +19,7 @@
 'use strict';
 
 import React from "react";
+import * as PropTypes from "prop-types";
 
 import {Dialog, DialogTitle, makeStyles, Tab, Tabs} from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
@@ -70,5 +71,12 @@ function LoginRegisterDialog({isOpen, selectedTab, handleDialogToggle, handleTab
         </div>
     );
 }
+
+LoginRegisterDialog.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    selectedTab: PropTypes.number.isRequired,
+    handleDialogToggle: PropTypes.func.isRequired,
+    handleTabSwitch: PropTypes.func.isRequired
+};
 
 export default LoginRegisterDialog;

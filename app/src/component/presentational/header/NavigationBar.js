@@ -19,6 +19,7 @@
 'use strict';
 
 import React from "react";
+import * as PropTypes from "prop-types";
 import {Link, NavLink} from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -132,6 +133,14 @@ const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
             />
         </div>
     );
+};
+
+NavigationBar.propTypes = {
+    header: PropTypes.object.isRequired,
+    openMobileMenu: PropTypes.func.isRequired,
+    closeMobileMenu: PropTypes.func.isRequired,
+    toggleLoginRegisterDialog: PropTypes.func.isRequired,
+    switchLoginRegisterDialogTab: PropTypes.func.isRequired,
 };
 
 export default NavigationBar;

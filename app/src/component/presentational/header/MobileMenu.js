@@ -23,9 +23,9 @@ import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Link, NavLink} from "react-router-dom";
+import {Link } from "react-router-dom";
 import React from "react";
-import {Button} from "@material-ui/core";
+import * as PropTypes from "prop-types";
 
 /**
  * On small (mobile) screens the header doesn't not show the normal buttons but this MobileMenu instead. A MenuList will
@@ -70,7 +70,11 @@ function MobileMenu({mobileMenuAnchorEl, handleMobileMenuClose}) {
             )}
         </Popper>
     );
-
 }
+
+MobileMenu.propTypes = {
+    mobileMenuAnchorEl: PropTypes.object,
+    handleMobileMenuClose: PropTypes.func.isRequired
+};
 
 export default MobileMenu;

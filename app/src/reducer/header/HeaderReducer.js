@@ -22,24 +22,16 @@ import {TOGGLE_MOBILE_MENU} from "../../action/HeaderAction";
 import loginRegisterDialog from "./LoginRegisterReducer";
 import {combineReducers} from "redux";
 
-const initialHeaderState = {
-    mobileMenuAnchorEL: null
-};
-
-const header = (state=initialHeaderState, action) => {
+const mobileMenuAnchorEL = (state=null, action) => {
     switch (action.type) {
         case TOGGLE_MOBILE_MENU:
-            return {
-                ...state,
-                mobileMenuAnchorEL: action.mobileMenuAnchorEL
-            };
+            return action.mobileMenuAnchorEL;
         default:
             return state;
     }
-
 };
 
 export default combineReducers({
-    header,
+    mobileMenuAnchorEL,
     loginRegisterDialog
 });

@@ -42,7 +42,7 @@ if (process.env.ENVIRONMENT === 'dev') {
         //applyMiddleware(d1, d2, d3),
         DevTools.instrument()
     );
-    store = createStore(AppReducer, {}, storeEnhancer)
+    store = createStore(AppReducer, {}, storeEnhancer);
 } else {
     store = createStore(AppReducer)
 }
@@ -57,6 +57,7 @@ export default function App() {
                     <BrowserRouter>
                         <Header />
                         <MainLayout />
+
                         <DevTools />
                     </BrowserRouter>
                 </Provider>

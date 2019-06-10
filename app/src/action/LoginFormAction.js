@@ -39,7 +39,14 @@ export const changeEmailField = (emailField, newValue) => {
 
 
 export const validateEmailField = (emailField) => {
-    const validationResult = InputFieldValidationService.validateEmail(emailField.value);
+    let validationResult = {
+        valid: true,
+        errorMessage: ''
+    };
+    if (emailField.validationRequired) {
+        validationResult = InputFieldValidationService.validateEmail(emailField.value);
+    }
+
     return {
         type: VALIDATE_EMAIL_FIELD,
         emailField: {

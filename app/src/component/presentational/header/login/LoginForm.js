@@ -38,8 +38,14 @@ const LoginForm = ({loginForm, onClose, onLogin, handleLoginFormEmailChange, han
                         value={loginForm.emailField.value}
                         error={!loginForm.emailField.valid}
                         helperText={loginForm.emailField.valid ? '' : loginForm.emailField.errorMessage}
-                        onChange={e => handleLoginFormEmailChange(loginForm.emailField, e.target.value)}
-                        onBlur={() => handleLoginFormEmailValidation(loginForm.emailField)}
+                        onChange={e => {
+                            e.preventDefault();
+                            handleLoginFormEmailChange(loginForm.emailField, e.target.value);
+                        }}
+                        onBlur={e => {
+                            e.preventDefault();
+                            handleLoginFormEmailValidation(loginForm.emailField)
+                        }}
                         margin="dense"
                         fullWidth
                         autoFocus

@@ -18,7 +18,7 @@
 
 'use strict';
 
-import {CHANGE_EMAIL_FIELD} from "../../../action/LoginFormAction";
+import {CHANGE_EMAIL_FIELD, VALIDATE_EMAIL_FIELD} from "../../../action/LoginFormAction";
 
 export const initialLoginFormState = {
     emailField: {
@@ -41,6 +41,7 @@ export const initialLoginFormState = {
 export const loginFormReducer = (state=initialLoginFormState, action) => {
     switch (action.type) {
         case CHANGE_EMAIL_FIELD:
+        case VALIDATE_EMAIL_FIELD:
             return {
                 ...state,
                 emailField: {

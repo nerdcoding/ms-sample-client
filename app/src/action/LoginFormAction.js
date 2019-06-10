@@ -18,7 +18,10 @@
 
 'use strict';
 
+import InputFieldValidationService from "../service/validation/InputFieldValidationService";
+
 export const CHANGE_EMAIL_FIELD = 'CHANGE_EMAIL_FIELD';
+export const VALIDATE_EMAIL_FIELD = 'VALIDATE_EMAIL_FIELD';
 export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
 
 export const changeEmailField = (emailField, newValue) => {
@@ -27,8 +30,23 @@ export const changeEmailField = (emailField, newValue) => {
         emailField: {
             value: newValue,
             valid: emailField.valid,
-            validationRequired: emailField.validationRequired,
+            validationRequired: true, // after first change by the user, validation is always required
             errorMessage: emailField.errorMessage,
+            name: 'email'
+        }
+    }
+};
+
+
+export const validateEmailField = (emailField) => {
+    const validationResult = InputFieldValidationService.validateEmail(emailField.value);
+    return {
+        type: VALIDATE_EMAIL_FIELD,
+        emailField: {
+            value: emailField.value,
+            valid: validationResult.valid,
+            validationRequired: emailField.validationRequired,
+            errorMessage: validationResult.errorMessage,
             name: 'email'
         }
     }

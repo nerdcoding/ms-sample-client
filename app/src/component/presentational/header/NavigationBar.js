@@ -71,7 +71,8 @@ const useStyles = makeStyles(theme => ({
  * Renders the navbar (AppBar) on the top of the screen containing all router buttons.
  */
 const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
-        toggleLoginRegisterDialog, switchLoginRegisterDialogTab}) => {
+        toggleLoginRegisterDialog, switchLoginRegisterDialogTab,
+        handleLoginFormEmailChange, handleLoginFormEmailValidation}) => {
     const classes = useStyles();
     return(
         <div className={classes.root}>
@@ -121,8 +122,11 @@ const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
 
                     <LoginRegisterDialog isOpen={header.loginRegisterDialog.isOpen}
                                          selectedTab={header.loginRegisterDialog.selectedTab}
+                                         loginForm={header.loginRegisterDialog.loginForm}
                                          handleDialogToggle={toggleLoginRegisterDialog}
                                          handleTabSwitch={switchLoginRegisterDialogTab}
+                                         handleLoginFormEmailChange={handleLoginFormEmailChange}
+                                         handleLoginFormEmailValidation={handleLoginFormEmailValidation}
                     />
                 </Toolbar>
             </AppBar>
@@ -141,6 +145,8 @@ NavigationBar.propTypes = {
     closeMobileMenu: PropTypes.func.isRequired,
     toggleLoginRegisterDialog: PropTypes.func.isRequired,
     switchLoginRegisterDialogTab: PropTypes.func.isRequired,
+    handleLoginFormEmailChange: PropTypes.func.isRequired,
+    handleLoginFormEmailValidation: PropTypes.func.isRequired,
 };
 
 export default NavigationBar;

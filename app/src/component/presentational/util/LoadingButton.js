@@ -26,7 +26,7 @@ import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     button: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(1),
     }
 }));
 
@@ -47,7 +47,6 @@ const LoadingButton = ({ isLoading, ...other }) => {
 };
 
 LoadingButton.propTypes = {
-    classes: PropTypes.object.isRequired,
     isLoading: PropTypes.bool
 };
 

@@ -23,7 +23,7 @@ import {
     HANDLE_LOGIN_ERROR, HANDLE_LOGIN_IS_LOADING,
     HANDLE_LOGIN_SUCCESS,
     VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
-} from "../../../action/LoginFormAction";
+} from "../../../action/header/login/LoginFormAction";
 
 export const loginFormReducer = (loginForm, action) => {
     switch (action.type) {

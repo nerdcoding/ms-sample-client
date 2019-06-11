@@ -18,12 +18,12 @@
 
 'use strict';
 
-import {TOGGLE_LOGIN_REGISTER_DIALOG, SWITCH_LOGIN_REGISTER_DIALOG_TAB} from "../../../action/LoginRegisterAction";
+import {TOGGLE_LOGIN_REGISTER_DIALOG, SWITCH_LOGIN_REGISTER_DIALOG_TAB} from "../../../action/header/login/LoginRegisterAction";
 import {
     CHANGE_EMAIL_FIELD, CHANGE_PASSWORD_FIELD,
     HANDLE_LOGIN_ERROR, HANDLE_LOGIN_IS_LOADING,
     HANDLE_LOGIN_SUCCESS, VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
-} from "../../../action/LoginFormAction";
+} from "../../../action/header/login/LoginFormAction";
 import {
     handleLoginErrorReducer,
     handleLoginIsLoadingReducer,

@@ -21,15 +21,15 @@
 import {connect} from "react-redux";
 
 import NavigationBar from "../presentational/header/NavigationBar";
-import {toggleMobileMenu} from "../../action/HeaderAction";
-import {toggleLoginRegisterDialog, switchLoginRegisterDialogTab} from "../../action/LoginRegisterAction";
+import {toggleMobileMenu} from "../../action/header/HeaderAction";
+import {toggleLoginRegisterDialog, switchLoginRegisterDialogTab} from "../../action/header/login/LoginRegisterAction";
 import {
     changeEmailField,
     changePasswordField,
     handleLogin,
     validateEmailField,
     validatePasswordField
-} from "../../action/LoginFormAction";
+} from "../../action/header/login/LoginFormAction";
 import React from "react";
 
 const mapStateToProps = state => ({

@@ -18,10 +18,11 @@
 
 'use strict';
 
-import InputFieldValidationService from "../service/validation/InputFieldValidationService";
+import InputFieldValidationService from "../../../service/validation/InputFieldValidationService";
 import * as axios from "axios";
-import {MINIMUM_PASSWORD_LENGTH} from "../service/Constants";
+import {MINIMUM_PASSWORD_LENGTH} from "../../../service/Constants";
 import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
+import {changeGlobalMessage} from "../../GlobalMessageAction";
 
 const EMAIL_FIELD_NAME = 'email';
 const PASSWORD_FIELD_NAME = 'password';
@@ -139,6 +140,12 @@ export const handleLogin = (username, password) => {
             );
             dispatch(handleLoginSuccess(response.data.access_token));
             dispatch(toggleLoginRegisterDialog(true));
+            dispatch(changeGlobalMessage({
+                isError: false,
+                showMessage: true,
+                messageText: 'Logged in successfully',
+                errorResponse: {},
+            }));
         } catch (error) {
             dispatch(handleLoginError(true));
         }

@@ -34,6 +34,7 @@ import MomentUtils from "@date-io/moment";
 import theme from "./../theme";
 import AppReducer from "../reducer/AppReducer";
 import Header from "./container/Header";
+import GlobalMessage from "./container/GlobalMessage";
 import DevTools from './container/DevTools';
 import MainLayout from "./presentational/MainLayout";
 
@@ -56,6 +57,7 @@ export default function App() {
                     <CssBaseline />
 
                     <BrowserRouter>
+                        <GlobalMessage />
                         <Header />
                         <MainLayout />
 

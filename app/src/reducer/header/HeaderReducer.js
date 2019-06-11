@@ -18,7 +18,7 @@
 
 'use strict';
 
-import {TOGGLE_MOBILE_MENU} from "../../action/HeaderAction";
+import {TOGGLE_MOBILE_MENU} from "../../action/header/HeaderAction";
 
 
 export const mobileMenuAnchorEL = (state=null, action) => {

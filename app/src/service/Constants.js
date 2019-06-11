@@ -19,3 +19,4 @@
 'use strict';
 
 export const MINIMUM_PASSWORD_LENGTH = 8;
+export const GLOBAL_MESSAGE_AUTO_HIDE = 6000;

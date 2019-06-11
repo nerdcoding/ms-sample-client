@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * GlobalMessageReducer.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,15 +18,19 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import {mobileMenuAnchorEL} from "./header/HeaderReducer";
-import {loginRegisterDialogReducer} from "./header/login/LoginRegisterDialogReducer";
-import {globalMessageReducer} from "./GlobalMessageReducer";
+import {CHANGE_GLOBAL_MESSAGE} from "../action/GlobalMessageAction";
 
-export default combineReducers({
-    header: combineReducers({
-        mobileMenuAnchorEL,
-        loginRegisterDialog: loginRegisterDialogReducer
-    }),
-    globalMessage: globalMessageReducer
-});
+export const initialGlobalMessage = {
+    isError: false,
+    showMessage: false,
+    messageText: '',
+    errorResponse: {},
+};
+
+export const globalMessageReducer = (state=initialGlobalMessage, action) => {
+    if (action.type === CHANGE_GLOBAL_MESSAGE) {
+        return action.globalMessage;
+    }
+
+    return state;
+};

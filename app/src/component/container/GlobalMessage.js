@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * GlobalMessage.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,15 +18,24 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import {mobileMenuAnchorEL} from "./header/HeaderReducer";
-import {loginRegisterDialogReducer} from "./header/login/LoginRegisterDialogReducer";
-import {globalMessageReducer} from "./GlobalMessageReducer";
+import React from "react";
+import {changeGlobalMessage} from "../../action/GlobalMessageAction";
+import GlobalMessageComponent from "../presentational/util/GlobalMessageComponent";
+import {initialGlobalMessage} from "../../reducer/GlobalMessageReducer";
+import {connect} from "react-redux";
 
-export default combineReducers({
-    header: combineReducers({
-        mobileMenuAnchorEL,
-        loginRegisterDialog: loginRegisterDialogReducer
-    }),
-    globalMessage: globalMessageReducer
+
+
+const mapStateToProps = state => ({
+    globalMessage: state.globalMessage
 });
+
+const mapDispatchToProps = dispatch => ({
+    onClose: () => dispatch(changeGlobalMessage(initialGlobalMessage)),
+});
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(GlobalMessageComponent)

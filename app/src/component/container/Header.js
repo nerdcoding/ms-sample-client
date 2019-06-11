@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => ({
     toggleLoginRegisterDialog: isOpen => dispatch(toggleLoginRegisterDialog(isOpen)),
     switchLoginRegisterDialogTab: selectedTab => dispatch(switchLoginRegisterDialogTab(selectedTab)),
 
-    handleLogin: (onLoginLoading) => dispatch(handleLogin(onLoginLoading)),
+    handleLogin: (username, password) => dispatch(handleLogin(username, password)),
     handleLoginFormEmailChange: (emailField, newValue) => dispatch(changeEmailField(emailField, newValue)),
     handleLoginFormEmailValidation: emailField => dispatch(validateEmailField(emailField)),
     handleLoginFormPasswordChange: (passwordField, newValue) => dispatch(changePasswordField(passwordField, newValue)),

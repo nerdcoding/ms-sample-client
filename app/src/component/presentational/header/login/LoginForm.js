@@ -32,7 +32,7 @@ const LoginForm = ({loginForm, onClose, onLogin,
         <React.Fragment>
             <form onSubmit={e => {
                     e.preventDefault();
-                    onLogin('user', 'secret');
+                    onLogin(loginForm.emailField.value, loginForm.passwordField.value);
                   }}
                   noValidate>
                 <DialogContent>

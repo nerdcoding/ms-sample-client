@@ -38,7 +38,7 @@ export const changeEmailField = (emailField, newValue) => {
         type: CHANGE_EMAIL_FIELD,
         emailField: {
             value: newValue,
-            valid: emailField.valid,
+            valid: true, // Always valid during changing, validation is done afterwards.
             validationRequired: true, // after first change by the user, validation is always required
             errorMessage: emailField.errorMessage,
             name: EMAIL_FIELD_NAME
@@ -72,7 +72,7 @@ export const changePasswordField = (passwordField, newValue) => {
         type: CHANGE_PASSWORD_FIELD,
         passwordField: {
             value: newValue,
-            valid: passwordField.valid,
+            valid: true, // Always valid during changing, validation is done afterwards.
             validationRequired: true, // after first change by the user, validation is always required
             errorMessage: passwordField.errorMessage,
             name: PASSWORD_FIELD_NAME

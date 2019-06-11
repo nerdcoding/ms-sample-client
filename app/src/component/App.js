@@ -21,7 +21,8 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 
-import {compose, createStore} from "redux";
+import {applyMiddleware, compose, createStore} from "redux";
+import thunkMiddleware from 'redux-thunk'
 import {Provider} from "react-redux";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -39,12 +40,12 @@ import MainLayout from "./presentational/MainLayout";
 let store;
 if (process.env.ENVIRONMENT === 'dev') {
     const storeEnhancer = compose(
-        //applyMiddleware(d1, d2, d3),
+        applyMiddleware(thunkMiddleware),
         DevTools.instrument()
     );
     store = createStore(AppReducer, {}, storeEnhancer);
 } else {
-    store = createStore(AppReducer)
+    store = createStore(AppReducer, applyMiddleware(thunkMiddleware));
 }
 
 export default function App() {

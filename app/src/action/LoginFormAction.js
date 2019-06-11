@@ -19,10 +19,16 @@
 'use strict';
 
 import InputFieldValidationService from "../service/validation/InputFieldValidationService";
+import * as axios from "axios";
+
+const EMAIL_FIELD_NAME = 'email';
 
 export const CHANGE_EMAIL_FIELD = 'CHANGE_EMAIL_FIELD';
 export const VALIDATE_EMAIL_FIELD = 'VALIDATE_EMAIL_FIELD';
 export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
+export const HANDLE_LOGIN_SUCCESS = 'HANDLE_LOGIN_SUCCESS';
+export const HANDLE_LOGIN_ERROR = 'HANDLE_LOGIN_ERROR';
+export const HANDLE_LOGIN_IS_LOADING = 'HANDLE_LOGIN_IS_LOADING';
 
 export const changeEmailField = (emailField, newValue) => {
     return {
@@ -32,11 +38,10 @@ export const changeEmailField = (emailField, newValue) => {
             valid: emailField.valid,
             validationRequired: true, // after first change by the user, validation is always required
             errorMessage: emailField.errorMessage,
-            name: 'email'
+            name: EMAIL_FIELD_NAME
         }
     }
 };
-
 
 export const validateEmailField = (emailField) => {
     let validationResult = {
@@ -54,7 +59,48 @@ export const validateEmailField = (emailField) => {
             valid: validationResult.valid,
             validationRequired: emailField.validationRequired,
             errorMessage: validationResult.errorMessage,
-            name: 'email'
+            name: EMAIL_FIELD_NAME
         }
+    }
+};
+
+export const handleLoginSuccess = (accessToken) => {
+    return {
+        type: HANDLE_LOGIN_SUCCESS,
+        access_token: accessToken
+    };
+};
+export const handleLoginError = (bool) => {
+    return {
+        type: HANDLE_LOGIN_ERROR,
+        globalErrorMessage: 'ERROR'
+    };
+};
+export const handleLoginIsLoading = (bool) => {
+    return {
+        type: HANDLE_LOGIN_IS_LOADING,
+        onLoginLoading: bool
+    };
+};
+
+
+export const handleLogin = (username, password) => {
+    return async (dispatch, getState) => {
+        dispatch(handleLoginIsLoading(true));
+
+        try {
+            const response =await axios.create({
+                baseURL: 'http://www.mocky.io',
+                timeout: 30000
+            }).get(
+                '/v2/5cff6ace3200007d00eac607?mocky-delay=100ms',
+                {headers: {'Content-Type': 'application/json'}}
+            );
+            dispatch(handleLoginSuccess(response.data.access_token));
+        } catch (error) {
+            dispatch(handleLoginError(true));
+        }
+
+        dispatch(handleLoginIsLoading(false));
     }
 };

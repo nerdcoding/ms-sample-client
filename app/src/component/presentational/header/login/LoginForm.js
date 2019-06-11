@@ -28,7 +28,11 @@ import Button from "@material-ui/core/Button";
 const LoginForm = ({loginForm, onClose, onLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation}) => {
     return(
         <React.Fragment>
-            <form onSubmit={onLogin} noValidate>
+            <form onSubmit={e => {
+                    e.preventDefault();
+                    onLogin('user', 'secret');
+                  }}
+                  noValidate>
                 <DialogContent>
                     <TextField
                         id='email'
@@ -44,7 +48,7 @@ const LoginForm = ({loginForm, onClose, onLogin, handleLoginFormEmailChange, han
                         }}
                         onBlur={e => {
                             e.preventDefault();
-                            handleLoginFormEmailValidation(loginForm.emailField)
+                            handleLoginFormEmailValidation(loginForm.emailField);
                         }}
                         margin="dense"
                         fullWidth

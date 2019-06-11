@@ -19,7 +19,17 @@
 'use strict';
 
 import {TOGGLE_LOGIN_REGISTER_DIALOG, SWITCH_LOGIN_REGISTER_DIALOG_TAB} from "../../../action/LoginRegisterAction";
-import {CHANGE_EMAIL_FIELD, VALIDATE_EMAIL_FIELD} from "../../../action/LoginFormAction";
+import {
+    CHANGE_EMAIL_FIELD,
+    HANDLE_LOGIN_ERROR, HANDLE_LOGIN_IS_LOADING,
+    HANDLE_LOGIN_SUCCESS, VALIDATE_EMAIL_FIELD
+} from "../../../action/LoginFormAction";
+import {
+    handleLoginErrorReducer,
+    handleLoginIsLoadingReducer,
+    handleLoginSuccessReducer,
+    loginFormReducer
+} from "./LoginFormReducer";
 
 const initialState = {
     isOpen: false,
@@ -56,6 +66,21 @@ export const loginRegisterDialogReducer = (state=initialState, action) => {
                 ...state,
                 loginForm: loginFormReducer(state.loginForm, action)
             };
+        case HANDLE_LOGIN_SUCCESS:
+            return {
+                ...state,
+                loginForm: handleLoginSuccessReducer(state.loginForm, action)
+            };
+        case HANDLE_LOGIN_ERROR:
+            return {
+                ...state,
+                loginForm: handleLoginErrorReducer(state.loginForm, action)
+            };
+        case HANDLE_LOGIN_IS_LOADING:
+            return {
+                ...state,
+                loginForm: handleLoginIsLoadingReducer(state.loginForm, action)
+            };
         default:
             return state;
     }
@@ -79,19 +104,3 @@ const selectedTabReducer = (state, action) => {
     }
 };
 
-const loginFormReducer = (loginForm, action) => {
-    switch (action.type) {
-        case CHANGE_EMAIL_FIELD:
-        case VALIDATE_EMAIL_FIELD:
-            return {
-                ...loginForm,
-                emailField: {
-                    value: action.emailField.value,
-                    valid: action.emailField.valid,
-                    validationRequired: action.emailField.validationRequired,
-                    errorMessage: action.emailField.errorMessage,
-                    name: action.emailField.name
-                }
-            }
-    }
-};

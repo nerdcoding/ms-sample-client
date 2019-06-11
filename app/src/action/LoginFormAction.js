@@ -21,6 +21,7 @@
 import InputFieldValidationService from "../service/validation/InputFieldValidationService";
 import * as axios from "axios";
 import {MINIMUM_PASSWORD_LENGTH} from "../service/Constants";
+import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
 
 const EMAIL_FIELD_NAME = 'email';
 const PASSWORD_FIELD_NAME = 'password';
@@ -137,6 +138,7 @@ export const handleLogin = (username, password) => {
                 {headers: {'Content-Type': 'application/json'}}
             );
             dispatch(handleLoginSuccess(response.data.access_token));
+            dispatch(toggleLoginRegisterDialog(true));
         } catch (error) {
             dispatch(handleLoginError(true));
         }

@@ -24,7 +24,16 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import LoadingButton from "../../util/LoadingButton";
+import InputFieldValidationService from "../../../../service/validation/InputFieldValidationService";
+import {MINIMUM_PASSWORD_LENGTH} from "../../../../service/Constants";
 
+const areAllFieldsValid = (loginForm) => {
+    return !loginForm.onLoginLoading
+                && InputFieldValidationService.validateEmail(
+                        loginForm.emailField.value).valid
+                && InputFieldValidationService.validateInputLength(
+                        'password', loginForm.passwordField.value, MINIMUM_PASSWORD_LENGTH).valid
+};
 
 const LoginForm = ({loginForm, onClose, onLogin,
         handleLoginFormEmailChange, handleLoginFormEmailValidation,
@@ -83,6 +92,7 @@ const LoginForm = ({loginForm, onClose, onLogin,
                     </Button>
                     <LoadingButton
                         isLoading={loginForm.onLoginLoading}
+                        disabled={!areAllFieldsValid(loginForm)}
                         color="primary"
                         variant='outlined'
                         type='submit'

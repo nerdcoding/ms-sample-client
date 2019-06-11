@@ -23,6 +23,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import LoadingButton from "../../util/LoadingButton";
 
 
 const LoginForm = ({loginForm, onClose, onLogin,
@@ -80,13 +81,14 @@ const LoginForm = ({loginForm, onClose, onLogin,
                     <Button onClick={onClose} color="primary" >
                         Cancel
                     </Button>
-                    <Button
+                    <LoadingButton
+                        isLoading={loginForm.onLoginLoading}
                         color="primary"
                         variant='outlined'
                         type='submit'
                     >
                         Login
-                    </Button>
+                    </LoadingButton>
 
                 </DialogActions>
             </form>

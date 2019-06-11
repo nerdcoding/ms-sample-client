@@ -133,7 +133,7 @@ export const handleLogin = (username, password) => {
                 baseURL: 'http://www.mocky.io',
                 timeout: 30000
             }).get(
-                '/v2/5cff6ace3200007d00eac607?mocky-delay=100ms',
+                '/v2/5cff6ace3200007d00eac607?mocky-delay=2500ms',
                 {headers: {'Content-Type': 'application/json'}}
             );
             dispatch(handleLoginSuccess(response.data.access_token));

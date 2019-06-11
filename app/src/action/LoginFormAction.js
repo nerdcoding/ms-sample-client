@@ -20,12 +20,15 @@
 
 import InputFieldValidationService from "../service/validation/InputFieldValidationService";
 import * as axios from "axios";
+import {MINIMUM_PASSWORD_LENGTH} from "../service/Constants";
 
 const EMAIL_FIELD_NAME = 'email';
+const PASSWORD_FIELD_NAME = 'password';
 
 export const CHANGE_EMAIL_FIELD = 'CHANGE_EMAIL_FIELD';
 export const VALIDATE_EMAIL_FIELD = 'VALIDATE_EMAIL_FIELD';
 export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
+export const VALIDATE_PASSWORD_FIELD = 'VALIDATE_PASSWORD_FIELD';
 export const HANDLE_LOGIN_SUCCESS = 'HANDLE_LOGIN_SUCCESS';
 export const HANDLE_LOGIN_ERROR = 'HANDLE_LOGIN_ERROR';
 export const HANDLE_LOGIN_IS_LOADING = 'HANDLE_LOGIN_IS_LOADING';
@@ -63,6 +66,43 @@ export const validateEmailField = (emailField) => {
         }
     }
 };
+
+export const changePasswordField = (passwordField, newValue) => {
+    return {
+        type: CHANGE_PASSWORD_FIELD,
+        passwordField: {
+            value: newValue,
+            valid: passwordField.valid,
+            validationRequired: true, // after first change by the user, validation is always required
+            errorMessage: passwordField.errorMessage,
+            name: PASSWORD_FIELD_NAME
+        }
+    }
+};
+
+export const validatePasswordField = (passwordField) => {
+    let validationResult = {
+        valid: true,
+        errorMessage: ''
+    };
+    if (passwordField.validationRequired) {
+        validationResult = InputFieldValidationService.validateInputLength(
+            'password', passwordField.value, MINIMUM_PASSWORD_LENGTH
+        );
+    }
+
+    return {
+        type: VALIDATE_PASSWORD_FIELD,
+        passwordField: {
+            value: passwordField.value,
+            valid: validationResult.valid,
+            validationRequired: passwordField.validationRequired,
+            errorMessage: validationResult.errorMessage,
+            name: PASSWORD_FIELD_NAME
+        }
+    }
+};
+
 
 export const handleLoginSuccess = (accessToken) => {
     return {

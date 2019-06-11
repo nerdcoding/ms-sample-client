@@ -19,10 +19,10 @@
 'use strict';
 
 import {
-    CHANGE_EMAIL_FIELD,
+    CHANGE_EMAIL_FIELD, CHANGE_PASSWORD_FIELD,
     HANDLE_LOGIN_ERROR, HANDLE_LOGIN_IS_LOADING,
     HANDLE_LOGIN_SUCCESS,
-    VALIDATE_EMAIL_FIELD
+    VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
 } from "../../../action/LoginFormAction";
 
 export const loginFormReducer = (loginForm, action) => {
@@ -38,7 +38,21 @@ export const loginFormReducer = (loginForm, action) => {
                     errorMessage: action.emailField.errorMessage,
                     name: action.emailField.name
                 }
-            }
+            };
+        case CHANGE_PASSWORD_FIELD:
+        case VALIDATE_PASSWORD_FIELD:
+            return {
+                ...loginForm,
+                passwordField: {
+                    value: action.passwordField.value,
+                    valid: action.passwordField.valid,
+                    validationRequired: action.passwordField.validationRequired,
+                    errorMessage: action.passwordField.errorMessage,
+                    name: action.passwordField.name
+                }
+            };
+        default:
+            return loginForm;
     }
 };
 

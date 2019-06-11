@@ -37,7 +37,8 @@ const useStyles = makeStyles(theme => ({
  * Defines a dialog (opened by the NavigationBar) for login and registration.
  */
 function LoginRegisterDialog({isOpen, selectedTab, loginForm, handleDialogToggle, handleTabSwitch,
-        handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation}) {
+        handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation,
+        handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) {
     const classes = useStyles();
     return (
         <div>
@@ -70,7 +71,10 @@ function LoginRegisterDialog({isOpen, selectedTab, loginForm, handleDialogToggle
                         onClose={() => handleDialogToggle(isOpen)}
                         onLogin={handleLogin}
                         handleLoginFormEmailChange={handleLoginFormEmailChange}
-                        handleLoginFormEmailValidation={handleLoginFormEmailValidation} />
+                        handleLoginFormEmailValidation={handleLoginFormEmailValidation}
+                        handleLoginFormPasswordChange={handleLoginFormPasswordChange}
+                        handleLoginFormPasswordValidation={handleLoginFormPasswordValidation}
+                      />
                     : <RegisterForm />
                 }
             </Dialog>
@@ -87,6 +91,8 @@ LoginRegisterDialog.propTypes = {
     handleLogin: PropTypes.func.isRequired,
     handleLoginFormEmailChange: PropTypes.func.isRequired,
     handleLoginFormEmailValidation: PropTypes.func.isRequired,
+    handleLoginFormPasswordChange: PropTypes.func.isRequired,
+    handleLoginFormPasswordValidation: PropTypes.func.isRequired,
 };
 
 export default LoginRegisterDialog;

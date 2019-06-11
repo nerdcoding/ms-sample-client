@@ -23,7 +23,14 @@ import {connect} from "react-redux";
 import NavigationBar from "../presentational/header/NavigationBar";
 import {toggleMobileMenu} from "../../action/HeaderAction";
 import {toggleLoginRegisterDialog, switchLoginRegisterDialogTab} from "../../action/LoginRegisterAction";
-import {changeEmailField, handleLogin, validateEmailField} from "../../action/LoginFormAction";
+import {
+    changeEmailField,
+    changePasswordField,
+    handleLogin,
+    validateEmailField,
+    validatePasswordField
+} from "../../action/LoginFormAction";
+import React from "react";
 
 const mapStateToProps = state => ({
     header: state.header
@@ -37,7 +44,9 @@ const mapDispatchToProps = dispatch => ({
 
     handleLogin: (onLoginLoading) => dispatch(handleLogin(onLoginLoading)),
     handleLoginFormEmailChange: (emailField, newValue) => dispatch(changeEmailField(emailField, newValue)),
-    handleLoginFormEmailValidation: emailField => dispatch(validateEmailField(emailField))
+    handleLoginFormEmailValidation: emailField => dispatch(validateEmailField(emailField)),
+    handleLoginFormPasswordChange: (passwordField, newValue) => dispatch(changePasswordField(passwordField, newValue)),
+    handleLoginFormPasswordValidation: passwordField => dispatch(validatePasswordField(passwordField)),
 });
 
 

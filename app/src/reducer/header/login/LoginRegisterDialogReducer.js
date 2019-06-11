@@ -20,9 +20,9 @@
 
 import {TOGGLE_LOGIN_REGISTER_DIALOG, SWITCH_LOGIN_REGISTER_DIALOG_TAB} from "../../../action/LoginRegisterAction";
 import {
-    CHANGE_EMAIL_FIELD,
+    CHANGE_EMAIL_FIELD, CHANGE_PASSWORD_FIELD,
     HANDLE_LOGIN_ERROR, HANDLE_LOGIN_IS_LOADING,
-    HANDLE_LOGIN_SUCCESS, VALIDATE_EMAIL_FIELD
+    HANDLE_LOGIN_SUCCESS, VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
 } from "../../../action/LoginFormAction";
 import {
     handleLoginErrorReducer,
@@ -62,6 +62,8 @@ export const loginRegisterDialogReducer = (state=initialState, action) => {
             return selectedTabReducer(state, action);
         case CHANGE_EMAIL_FIELD:
         case VALIDATE_EMAIL_FIELD:
+        case CHANGE_PASSWORD_FIELD:
+        case VALIDATE_PASSWORD_FIELD:
             return {
                 ...state,
                 loginForm: loginFormReducer(state.loginForm, action)

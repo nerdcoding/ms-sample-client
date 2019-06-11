@@ -25,7 +25,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
 
-const LoginForm = ({loginForm, onClose, onLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation}) => {
+const LoginForm = ({loginForm, onClose, onLogin,
+        handleLoginFormEmailChange, handleLoginFormEmailValidation,
+        handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) => {
     return(
         <React.Fragment>
             <form onSubmit={e => {
@@ -54,19 +56,25 @@ const LoginForm = ({loginForm, onClose, onLogin, handleLoginFormEmailChange, han
                         fullWidth
                         autoFocus
                     />
-                    {/*<TextField
+                    <TextField
                         id='password'
-                        name={PASSWORD_FIELD_NAME}
+                        name={loginForm.passwordField.name}
                         type='password'
                         label='Password'
-                        value={passwordField.value}
-                        error={!passwordField.valid}
-                        helperText={passwordField.valid ? '' : passwordField.errorMessage}
-                        onChange={this.handleInputChange}
-                        onBlur={this.validate}
+                        value={loginForm.passwordField.value}
+                        error={!loginForm.passwordField.valid}
+                        helperText={loginForm.passwordField.valid ? '' : loginForm.passwordField.errorMessage}
+                        onChange={e => {
+                            e.preventDefault();
+                            handleLoginFormPasswordChange(loginForm.passwordField, e.target.value);
+                        }}
+                        onBlur={e => {
+                            e.preventDefault();
+                            handleLoginFormPasswordValidation(loginForm.passwordField);
+                        }}
                         margin="dense"
                         fullWidth
-                    />*/}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onClose} color="primary" >

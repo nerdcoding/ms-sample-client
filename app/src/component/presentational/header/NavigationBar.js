@@ -72,7 +72,8 @@ const useStyles = makeStyles(theme => ({
  */
 const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
         toggleLoginRegisterDialog, switchLoginRegisterDialogTab,
-        handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation}) => {
+        handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation,
+        handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) => {
     const classes = useStyles();
     return(
         <div className={classes.root}>
@@ -128,6 +129,8 @@ const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
                                          handleLogin={handleLogin}
                                          handleLoginFormEmailChange={handleLoginFormEmailChange}
                                          handleLoginFormEmailValidation={handleLoginFormEmailValidation}
+                                         handleLoginFormPasswordChange={handleLoginFormPasswordChange}
+                                         handleLoginFormPasswordValidation={handleLoginFormPasswordValidation}
                     />
                 </Toolbar>
             </AppBar>
@@ -149,6 +152,8 @@ NavigationBar.propTypes = {
     handleLogin: PropTypes.func.isRequired,
     handleLoginFormEmailChange: PropTypes.func.isRequired,
     handleLoginFormEmailValidation: PropTypes.func.isRequired,
+    handleLoginFormPasswordChange: PropTypes.func.isRequired,
+    handleLoginFormPasswordValidation: PropTypes.func.isRequired,
 };
 
 export default NavigationBar;

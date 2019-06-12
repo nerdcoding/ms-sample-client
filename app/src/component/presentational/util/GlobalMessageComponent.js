@@ -97,6 +97,7 @@ function GlobalMessageComponent({globalMessage, onClose}) {
 }
 
 function createErrorMessage(errorResponse, businessErrorMessage) {
+    console.log("Server error: " + errorResponse.message);
     if (errorResponse.response
             && errorResponse.response.status >= 400
             && errorResponse.response.status <= 499) {
@@ -105,7 +106,7 @@ function createErrorMessage(errorResponse, businessErrorMessage) {
             && errorResponse.message === 'Network Error')
         return "The server is currently not available. Please try again later.";
     else {
-        return "An unknown server error occurred. Please try again later.";
+        return "An unknown server error occurred (" + errorResponse.message + "). Please try again later.";
     }
 }
 

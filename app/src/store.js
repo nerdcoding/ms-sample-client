@@ -26,10 +26,15 @@ import DevTools from './component/container/DevTools';
 
 const sessionStorageAuthenticationTokenKey = "authentication";
 
-const saveAuthentication2LocalStorage = (state) => {
+const saveAuthenticationToLocalStorage = (state) => {
     if (state.authentication && state.authentication.access_token) {
         sessionStorage.setItem(sessionStorageAuthenticationTokenKey, JSON.stringify(state.authentication));
     }
+};
+
+const loadAuthenticationFromLocalStorage = () => {
+    const authentication = JSON.parse(sessionStorage    .getItem(sessionStorageAuthenticationTokenKey)) || undefined;
+    return { authentication }
 };
 
 export const createApplicationStore = () => {
@@ -39,13 +44,13 @@ export const createApplicationStore = () => {
             applyMiddleware(thunkMiddleware),
             DevTools.instrument()
         );
-        store = createStore(AppReducer, {}, storeEnhancer);
+        store = createStore(AppReducer, loadAuthenticationFromLocalStorage(), storeEnhancer);
     } else {
-        store = createStore(AppReducer, applyMiddleware(thunkMiddleware));
+        store = createStore(AppReducer, loadAuthenticationFromLocalStorage(), applyMiddleware(thunkMiddleware));
     }
 
     store.subscribe(() => {
-        saveAuthentication2LocalStorage(store.getState())
+        saveAuthenticationToLocalStorage(store.getState())
     });
 
     return store;

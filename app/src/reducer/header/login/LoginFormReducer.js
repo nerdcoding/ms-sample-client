@@ -67,16 +67,6 @@ export const handleLoginSuccessReducer = (loginForm, action) => {
 
     return loginForm;
 };
-export const handleLoginErrorReducer = (loginForm, action) => {
-    if (action.type === HANDLE_LOGIN_ERROR) {
-        return {
-            ...loginForm,
-            globalErrorMessage: 'Global error'
-        }
-    }
-
-    return loginForm;
-};
 export const handleLoginIsLoadingReducer = (loginForm, action) => {
     if (action.type === HANDLE_LOGIN_IS_LOADING) {
         return {

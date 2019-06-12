@@ -24,17 +24,17 @@ import * as axios from "axios";
 /**
  * Axios based REST client to call endpoints of the authorization server.
  */
-const callAuthServer = axios.create({
+const callAuthServerPublic = axios.create({
     baseURL: process.env.AUTH_SERVER_URL,
     auth: {
         username: process.env.AUTH_SERVER_USER,
         password: process.env.AUTH_SERVER_PASSWORD
     },
-    timeout: 5000
+    timeout: 30000
 });
 
 const RestClient = {
-    callAuthServer
+    callAuthServerPublic
 };
 
 export default RestClient;

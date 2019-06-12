@@ -19,10 +19,10 @@
 'use strict';
 
 import InputFieldValidationService from "../../../service/validation/InputFieldValidationService";
-import * as axios from "axios";
 import {MINIMUM_PASSWORD_LENGTH} from "../../../service/Constants";
 import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
 import {changeGlobalMessage} from "../../GlobalMessageAction";
+import RestClient from "../../../service/RestClient";
 
 const EMAIL_FIELD_NAME = 'email';
 const PASSWORD_FIELD_NAME = 'password';
@@ -32,7 +32,6 @@ export const VALIDATE_EMAIL_FIELD = 'VALIDATE_EMAIL_FIELD';
 export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
 export const VALIDATE_PASSWORD_FIELD = 'VALIDATE_PASSWORD_FIELD';
 export const HANDLE_LOGIN_SUCCESS = 'HANDLE_LOGIN_SUCCESS';
-export const HANDLE_LOGIN_ERROR = 'HANDLE_LOGIN_ERROR';
 export const HANDLE_LOGIN_IS_LOADING = 'HANDLE_LOGIN_IS_LOADING';
 
 export const changeEmailField = (emailField, newValue) => {
@@ -112,12 +111,6 @@ export const handleLoginSuccess = (accessToken) => {
         access_token: accessToken
     };
 };
-export const handleLoginError = (bool) => {
-    return {
-        type: HANDLE_LOGIN_ERROR,
-        globalErrorMessage: 'ERROR'
-    };
-};
 export const handleLoginIsLoading = (bool) => {
     return {
         type: HANDLE_LOGIN_IS_LOADING,
@@ -131,14 +124,17 @@ export const handleLogin = (username, password) => {
         dispatch(handleLoginIsLoading(true));
 
         try {
-            const response =await axios.create({
-                baseURL: 'http://www.mocky.io',
-                timeout: 30000
-            }).get(
-                '/v2/5cff6ace3200007d00eac607?mocky-delay=2500ms',
-                {headers: {'Content-Type': 'application/json'}}
+            const loginResponse = await RestClient.callAuthServerPublic.post(
+                '/oauth/token',
+                qs.stringify({
+                    'grant_type': 'password',
+                    'username': username,
+                    'password': password,
+                }),
+                { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
             );
-            dispatch(handleLoginSuccess(response.data.access_token));
+
+            dispatch(handleLoginSuccess(loginResponse.data.access_token));
             dispatch(toggleLoginRegisterDialog(true));
             dispatch(changeGlobalMessage({
                 isError: false,
@@ -147,7 +143,12 @@ export const handleLogin = (username, password) => {
                 errorResponse: {},
             }));
         } catch (error) {
-            dispatch(handleLoginError(true));
+            dispatch(changeGlobalMessage({
+                isError: true,
+                showMessage: true,
+                messageText: 'The provided username or password are incorrect. Please try again.',
+                errorResponse: error,
+            }));
         }
 
         dispatch(handleLoginIsLoading(false));

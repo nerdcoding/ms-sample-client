@@ -21,8 +21,6 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 
-import {applyMiddleware, compose, createStore} from "redux";
-import thunkMiddleware from 'redux-thunk'
 import {Provider} from "react-redux";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -32,28 +30,18 @@ import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import MomentUtils from "@date-io/moment";
 
 import theme from "./../theme";
-import AppReducer from "../reducer/AppReducer";
 import Header from "./container/Header";
 import GlobalMessage from "./container/GlobalMessage";
 import DevTools from './container/DevTools';
 import MainLayout from "./presentational/MainLayout";
+import {createApplicationStore} from "../store";
 
-let store;
-if (process.env.ENVIRONMENT === 'dev') {
-    const storeEnhancer = compose(
-        applyMiddleware(thunkMiddleware),
-        DevTools.instrument()
-    );
-    store = createStore(AppReducer, {}, storeEnhancer);
-} else {
-    store = createStore(AppReducer, applyMiddleware(thunkMiddleware));
-}
 
 export default function App() {
     return (
         <MuiThemeProvider theme={theme}>
             <MuiPickersUtilsProvider utils={MomentUtils}>
-                <Provider store={store}>
+                <Provider store={createApplicationStore()}>
                     <CssBaseline />
 
                     <BrowserRouter>

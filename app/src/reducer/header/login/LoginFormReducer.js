@@ -20,9 +20,7 @@
 
 import {
     CHANGE_EMAIL_FIELD, CHANGE_PASSWORD_FIELD,
-    HANDLE_LOGIN_ERROR, HANDLE_LOGIN_IS_LOADING,
-    HANDLE_LOGIN_SUCCESS,
-    VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
+    HANDLE_LOGIN_IS_LOADING, VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
 } from "../../../action/header/login/LoginFormAction";
 
 export const loginFormReducer = (loginForm, action) => {
@@ -56,17 +54,6 @@ export const loginFormReducer = (loginForm, action) => {
     }
 };
 
-
-export const handleLoginSuccessReducer = (loginForm, action) => {
-    if (action.type === HANDLE_LOGIN_SUCCESS) {
-        return {
-            ...loginForm,
-            access_token: action.access_token
-        }
-    }
-
-    return loginForm;
-};
 export const handleLoginIsLoadingReducer = (loginForm, action) => {
     if (action.type === HANDLE_LOGIN_IS_LOADING) {
         return {

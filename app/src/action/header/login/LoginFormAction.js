@@ -23,6 +23,7 @@ import {MINIMUM_PASSWORD_LENGTH} from "../../../service/Constants";
 import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
 import {changeGlobalMessage} from "../../GlobalMessageAction";
 import RestClient from "../../../service/RestClient";
+import * as qs from "qs";
 
 const EMAIL_FIELD_NAME = 'email';
 const PASSWORD_FIELD_NAME = 'password';
@@ -105,10 +106,10 @@ export const validatePasswordField = (passwordField) => {
 };
 
 
-export const handleLoginSuccess = (accessToken) => {
+export const handleLoginSuccess = (auth) => {
     return {
         type: HANDLE_LOGIN_SUCCESS,
-        access_token: accessToken
+        auth
     };
 };
 export const handleLoginIsLoading = (bool) => {
@@ -134,14 +135,8 @@ export const handleLogin = (username, password) => {
                 { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
             );
 
-            dispatch(handleLoginSuccess(loginResponse.data.access_token));
+            dispatch(handleLoginSuccess(loginResponse.data));
             dispatch(toggleLoginRegisterDialog(true));
-            dispatch(changeGlobalMessage({
-                isError: false,
-                showMessage: true,
-                messageText: 'Logged in successfully',
-                errorResponse: {},
-            }));
         } catch (error) {
             dispatch(changeGlobalMessage({
                 isError: true,

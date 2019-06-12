@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * AuthenticationReducer.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,17 +18,23 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import {mobileMenuAnchorEL} from "./header/HeaderReducer";
-import {loginRegisterDialogReducer} from "./header/login/LoginRegisterDialogReducer";
-import {globalMessageReducer} from "./GlobalMessageReducer";
-import {handleLoginSuccessReducer} from "./AuthenticationReducer";
 
-export default combineReducers({
-    header: combineReducers({
-        mobileMenuAnchorEL,
-        loginRegisterDialog: loginRegisterDialogReducer
-    }),
-    authentication: handleLoginSuccessReducer,
-    globalMessage: globalMessageReducer
-});
+import {HANDLE_LOGIN_SUCCESS} from "../action/header/login/LoginFormAction";
+
+export const initialAuthentication = {
+    access_token: null,
+    refresh_token: null,
+    user_id: null
+};
+
+export const handleLoginSuccessReducer = (state=initialAuthentication, action) => {
+    if (action.type === HANDLE_LOGIN_SUCCESS) {
+        return {
+            access_token: action.auth.access_token,
+            refresh_token: action.auth.refresh_token,
+            user_id: action.auth.user_id
+        }
+    }
+
+    return state;
+};

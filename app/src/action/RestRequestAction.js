@@ -1,5 +1,5 @@
 /*
- * Constants.js
+ * RestRequestAction.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,9 +18,24 @@
 
 'use strict';
 
-/** The minimum length of a password, used for validation during login and registration. */
-export const MINIMUM_PASSWORD_LENGTH = 8;
-/** When the GlobalMessageComponent shows a message, this message will auto hide during this milliseconds. */
-export const GLOBAL_MESSAGE_AUTO_HIDE = 6000;
-/** Timeout for requests to REST endpoints in milliseconds. */
-export const REST_REQUEST_TIMEOUT = 30000;
+import {AuthenticationType} from "../middleware/auth/AuthenticationType";
+import {HttpMethod} from "../middleware/HttpMethod";
+
+export const REST_REQUEST = "REST_REQUEST";
+
+export const requestRestEndpoint = (action) => {
+    const restRequestTemplate = {
+        type: "",
+        authenticationType: AuthenticationType.BEARER,
+        method: HttpMethod.GET,
+        endpoint: null,
+        payload: null,
+        headers: {},
+        errorMessageText: 'The provided username or password are incorrect. Please try again.',
+        subsequentActions: []
+    };
+
+    return {
+        REST_REQUEST: { ...restRequestTemplate, ...action }
+    };
+};

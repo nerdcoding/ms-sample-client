@@ -1,5 +1,5 @@
 /*
- * Constants.js
+ * AuthenticationType.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,9 +18,7 @@
 
 'use strict';
 
-/** The minimum length of a password, used for validation during login and registration. */
-export const MINIMUM_PASSWORD_LENGTH = 8;
-/** When the GlobalMessageComponent shows a message, this message will auto hide during this milliseconds. */
-export const GLOBAL_MESSAGE_AUTO_HIDE = 6000;
-/** Timeout for requests to REST endpoints in milliseconds. */
-export const REST_REQUEST_TIMEOUT = 30000;
+export const AuthenticationType = {
+    BASIC_AUTH: 'BASIC_AUTH',
+    BEARER: 'BEARER'
+};

@@ -20,7 +20,7 @@
 
 import {
     CHANGE_EMAIL_FIELD, CHANGE_PASSWORD_FIELD,
-    HANDLE_LOGIN_IS_LOADING, VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
+    LOGIN_IS_LOADING, VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
 } from "../../../action/header/login/LoginFormAction";
 
 export const loginFormReducer = (loginForm, action) => {
@@ -55,10 +55,10 @@ export const loginFormReducer = (loginForm, action) => {
 };
 
 export const handleLoginIsLoadingReducer = (loginForm, action) => {
-    if (action.type === HANDLE_LOGIN_IS_LOADING) {
+    if (action.type === LOGIN_IS_LOADING) {
         return {
             ...loginForm,
-            onLoginLoading: action.onLoginLoading
+            onLoginLoading: action.isLoading
         }
     }
 

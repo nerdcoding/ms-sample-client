@@ -20,10 +20,11 @@
 
 import InputFieldValidationService from "../../../service/validation/InputFieldValidationService";
 import {MINIMUM_PASSWORD_LENGTH} from "../../../service/Constants";
-import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
-import {changeGlobalMessage} from "../../GlobalMessageAction";
-import RestClient from "../../../service/RestClient";
 import * as qs from "qs";
+import {requestRestEndpoint} from "../../RestRequestAction";
+import {HttpMethod} from "../../../middleware/HttpMethod";
+import {AuthenticationType} from "../../../middleware/auth/AuthenticationType";
+import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
 
 const EMAIL_FIELD_NAME = 'email';
 const PASSWORD_FIELD_NAME = 'password';
@@ -32,8 +33,9 @@ export const CHANGE_EMAIL_FIELD = 'CHANGE_EMAIL_FIELD';
 export const VALIDATE_EMAIL_FIELD = 'VALIDATE_EMAIL_FIELD';
 export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
 export const VALIDATE_PASSWORD_FIELD = 'VALIDATE_PASSWORD_FIELD';
-export const HANDLE_LOGIN_SUCCESS = 'HANDLE_LOGIN_SUCCESS';
-export const HANDLE_LOGIN_IS_LOADING = 'HANDLE_LOGIN_IS_LOADING';
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_IS_LOADING = 'LOGIN_IS_LOADING';
 
 export const changeEmailField = (emailField, newValue) => {
     return {
@@ -105,47 +107,21 @@ export const validatePasswordField = (passwordField) => {
     }
 };
 
-
-export const handleLoginSuccess = (auth) => {
-    return {
-        type: HANDLE_LOGIN_SUCCESS,
-        auth
-    };
-};
-export const handleLoginIsLoading = (bool) => {
-    return {
-        type: HANDLE_LOGIN_IS_LOADING,
-        onLoginLoading: bool
-    };
-};
-
-
 export const handleLogin = (username, password) => {
-    return async (dispatch, getState) => {
-        dispatch(handleLoginIsLoading(true));
-
-        try {
-            const loginResponse = await RestClient.callAuthServerPublic.post(
-                '/oauth/token',
-                qs.stringify({
-                    'grant_type': 'password',
-                    'username': username,
-                    'password': password,
-                }),
-                { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-            );
-
-            dispatch(handleLoginSuccess(loginResponse.data));
-            dispatch(toggleLoginRegisterDialog(true));
-        } catch (error) {
-            dispatch(changeGlobalMessage({
-                isError: true,
-                showMessage: true,
-                messageText: 'The provided username or password are incorrect. Please try again.',
-                errorResponse: error,
-            }));
-        }
-
-        dispatch(handleLoginIsLoading(false));
-    }
+    return requestRestEndpoint({
+        type: LOGIN,
+        authenticationType: AuthenticationType.BASIC_AUTH,
+        method: HttpMethod.POST,
+        endpoint: process.env.AUTH_SERVER_URL + '/oauth/token',
+        payload: qs.stringify({
+            'grant_type': 'password',
+            'username': username,
+            'password': password,
+        }),
+        headers: {
+            'Authorization': 'Basic ' + btoa(process.env.AUTH_SERVER_USER+':'+process.env.AUTH_SERVER_PASSWORD),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        subsequentActions: [toggleLoginRegisterDialog(true)]
+    });
 };

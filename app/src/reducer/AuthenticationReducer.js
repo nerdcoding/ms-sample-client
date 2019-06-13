@@ -19,7 +19,7 @@
 'use strict';
 
 
-import {HANDLE_LOGIN_SUCCESS} from "../action/header/login/LoginFormAction";
+import {LOGIN_SUCCESS} from "../action/header/login/LoginFormAction";
 
 export const initialAuthentication = {
     access_token: null,
@@ -28,11 +28,11 @@ export const initialAuthentication = {
 };
 
 export const handleLoginSuccessReducer = (state=initialAuthentication, action) => {
-    if (action.type === HANDLE_LOGIN_SUCCESS) {
+    if (action.type === LOGIN_SUCCESS) {
         return {
-            access_token: action.auth.access_token,
-            refresh_token: action.auth.refresh_token,
-            user_id: action.auth.user_id
+            access_token: action.response.access_token,
+            refresh_token: action.response.refresh_token,
+            user_id: action.response.user_id
         }
     }
 

@@ -19,10 +19,10 @@
 'use strict';
 
 import {applyMiddleware, compose, createStore} from "redux";
-import thunkMiddleware from "redux-thunk";
 import AppReducer from "./reducer/AppReducer";
 
 import DevTools from './component/container/DevTools';
+import {restClientMiddleware} from "./middleware/RestClientMiddleware";
 
 const sessionStorageAuthenticationTokenKey = "authentication";
 
@@ -41,12 +41,12 @@ export const createApplicationStore = () => {
     let store;
     if (process.env.ENVIRONMENT === 'dev') {
         const storeEnhancer = compose(
-            applyMiddleware(thunkMiddleware),
+            applyMiddleware(restClientMiddleware),
             DevTools.instrument()
         );
         store = createStore(AppReducer, loadAuthenticationFromLocalStorage(), storeEnhancer);
     } else {
-        store = createStore(AppReducer, loadAuthenticationFromLocalStorage(), applyMiddleware(thunkMiddleware));
+        store = createStore(AppReducer, loadAuthenticationFromLocalStorage(), applyMiddleware(restClientMiddleware));
     }
 
     store.subscribe(() => {

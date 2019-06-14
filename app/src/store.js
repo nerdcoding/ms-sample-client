@@ -29,11 +29,13 @@ const sessionStorageAuthenticationTokenKey = "authentication";
 const saveAuthenticationToLocalStorage = (state) => {
     if (state.authentication && state.authentication.access_token) {
         sessionStorage.setItem(sessionStorageAuthenticationTokenKey, JSON.stringify(state.authentication));
+    } else {
+        sessionStorage.removeItem(sessionStorageAuthenticationTokenKey);
     }
 };
 
 const loadAuthenticationFromLocalStorage = () => {
-    const authentication = JSON.parse(sessionStorage    .getItem(sessionStorageAuthenticationTokenKey)) || undefined;
+    const authentication = JSON.parse(sessionStorage.getItem(sessionStorageAuthenticationTokenKey)) || undefined;
     return { authentication }
 };
 

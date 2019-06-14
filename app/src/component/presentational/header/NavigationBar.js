@@ -69,6 +69,7 @@ const useStyles = makeStyles(theme => ({
     },
     profileButton: {
         margin: theme.spacing(2),
+        padding: '4px 4px'
     },
 }));
 

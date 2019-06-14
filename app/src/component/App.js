@@ -33,8 +33,8 @@ import theme from "./../theme";
 import Header from "./container/Header";
 import GlobalMessage from "./container/GlobalMessage";
 import DevTools from './container/DevTools';
-import MainLayout from "./presentational/MainLayout";
 import {createApplicationStore} from "../store";
+import MainLayout from "./container/MainLayout";
 
 
 export default function App() {

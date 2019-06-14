@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const MainLayout = () => {
+const Router = ({authentication}) => {
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -59,7 +59,7 @@ const MainLayout = () => {
                 <Grid container justify='center' alignContent='center' >
                     <Switch>
                         <Route path='/home' component={HomePage} />
-                        <Route path='/about' component={AboutPage} />
+                        <PrivateRoute path='/about' component={AboutPage} authentication={authentication}  />
                         <Redirect to="/home" />
                     </Switch>
                 </Grid>
@@ -79,4 +79,19 @@ const MainLayout = () => {
     );
 };
 
-export default MainLayout;
+export default Router;
+
+/**
+ * 'PrivateRoute' always redirects to '/' when user is not logged in.
+ */
+const PrivateRoute = ({ component: Component, authentication, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        isLoggedIn(authentication)
+            ? <Component {...props} />
+            : <Redirect to='/' />
+    )} />
+);
+
+const isLoggedIn = (authentication) => {
+    return authentication && authentication.access_token;
+};

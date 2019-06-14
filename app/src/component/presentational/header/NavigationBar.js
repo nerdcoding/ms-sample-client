@@ -25,6 +25,7 @@ import {Link, NavLink} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar, Typography, Button, IconButton} from "@material-ui/core";
 import MoreIcon from '@material-ui/icons/MoreVert';
+import PersonIcon from "@material-ui/icons/Person";
 
 import MobileMenu from "./MobileMenu";
 import LoginRegisterDialog from "./login/LoginRegisterDialog";
@@ -65,12 +66,15 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(2),
         padding: '4px 32px'
     },
+    profileButton: {
+        margin: theme.spacing(2),
+    },
 }));
 
 /**
  * Renders the navbar (AppBar) on the top of the screen containing all router buttons.
  */
-const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
+const NavigationBar = ({header, authentication, openMobileMenu, closeMobileMenu,
         toggleLoginRegisterDialog, switchLoginRegisterDialogTab,
         handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation,
         handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) => {
@@ -95,16 +99,18 @@ const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
                             Home
                         </Button>
 
-                        <Button className={classes.button}
-                                variant='contained'
-                                size='small'
-                                color='secondary'
-                                component={React.forwardRef((props, ref) => (
-                                    <Link to="/about" {...props} ref={ref} />
-                                ))}
-                        >
-                            About
-                        </Button>
+                        {isLoggedIn(authentication) &&
+                            <Button className={classes.button}
+                                    variant='contained'
+                                    size='small'
+                                    color='secondary'
+                                    component={React.forwardRef((props, ref) => (
+                                        <Link to="/about" {...props} ref={ref} />
+                                    ))}
+                            >
+                                About
+                            </Button>
+                        }
                     </div>
                     <div className={classes.sectionMobile}>
                         <IconButton aria-haspopup="true" onClick={e => openMobileMenu(e.currentTarget)} color="inherit">
@@ -112,14 +118,25 @@ const NavigationBar = ({header, openMobileMenu, closeMobileMenu,
                         </IconButton>
                     </div>
 
-
-                    <Button className={classes.button}
-                            variant='contained'
-                            size='small'
-                            color='secondary'
-                            onClick={() => toggleLoginRegisterDialog(header.loginRegisterDialog.isOpen)} >
-                        Login / Register
-                    </Button>
+                    {isLoggedIn(authentication) &&
+                        <IconButton
+                            className={classes.profileButton}
+                            aria-haspopup="true"
+                            //onClick={this.handleProfileMenuOpen}
+                            color="inherit"
+                        >
+                            <PersonIcon />
+                        </IconButton>
+                    }
+                    {!isLoggedIn(authentication) &&
+                        <Button className={classes.button}
+                                variant='contained'
+                                size='small'
+                                color='secondary'
+                                onClick={() => toggleLoginRegisterDialog(header.loginRegisterDialog.isOpen)} >
+                            Login / Register
+                        </Button>
+                    }
 
                     <LoginRegisterDialog isOpen={header.loginRegisterDialog.isOpen}
                                          selectedTab={header.loginRegisterDialog.selectedTab}
@@ -157,3 +174,7 @@ NavigationBar.propTypes = {
 };
 
 export default NavigationBar;
+
+const isLoggedIn = (authentication) => {
+    return authentication && authentication.access_token;
+};

@@ -33,7 +33,7 @@ import {
 import React from "react";
 
 const mapStateToProps = state => ({
-    header: state.header
+    authentication: state.authentication
 });
 
 const mapDispatchToProps = dispatch => ({

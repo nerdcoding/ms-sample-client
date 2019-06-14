@@ -26,6 +26,7 @@ import Button from "@material-ui/core/Button";
 import LoadingButton from "../../util/LoadingButton";
 import InputFieldValidationService from "../../../../service/validation/InputFieldValidationService";
 import {MINIMUM_PASSWORD_LENGTH} from "../../../../service/Constants";
+import * as PropTypes from "prop-types";
 
 const areAllFieldsValid = (loginForm) => {
     return !loginForm.onLoginLoading
@@ -106,6 +107,17 @@ const LoginForm = ({loginForm, onClose, onLogin,
 
         </React.Fragment>
     );
+};
+
+LoginForm.propTypes = {
+    loginForm: PropTypes.object.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired,
+    handleLoginFormEmailChange: PropTypes.func.isRequired,
+    handleLoginFormEmailValidation: PropTypes.func.isRequired,
+    handleLoginFormPasswordChange: PropTypes.func.isRequired,
+    handleLoginFormPasswordValidation: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

@@ -20,6 +20,7 @@
 
 
 import {LOGIN_SUCCESS} from "../action/header/login/LoginFormAction";
+import {LOGOUT} from "../action/header/logout/LogoutAction";
 
 export const initialAuthentication = {
     access_token: null,
@@ -27,14 +28,17 @@ export const initialAuthentication = {
     user_id: null
 };
 
-export const handleLoginSuccessReducer = (state=initialAuthentication, action) => {
-    if (action.type === LOGIN_SUCCESS) {
-        return {
-            access_token: action.response.access_token,
-            refresh_token: action.response.refresh_token,
-            user_id: action.response.user_id
-        }
+export const authenticationReducer = (state=initialAuthentication, action) => {
+    switch (action.type) {
+        case LOGIN_SUCCESS:
+            return {
+                access_token: action.response.access_token,
+                refresh_token: action.response.refresh_token,
+                user_id: action.response.user_id
+            };
+        case LOGOUT:
+            return initialAuthentication;
+        default:
+            return state;
     }
-
-    return state;
 };

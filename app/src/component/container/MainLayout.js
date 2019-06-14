@@ -22,12 +22,17 @@ import {connect} from "react-redux";
 
 import React from "react";
 import Router from "../presentational/Router";
+import {logout} from "../../action/header/logout/LogoutAction";
 
 const mapStateToProps = state => ({
     authentication: state.authentication
 });
 
+const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(logout())
+});
 
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(Router)

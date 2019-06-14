@@ -1,5 +1,5 @@
 /*
- * AppReducer.js
+ * LogoutAction.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -18,18 +18,10 @@
 
 'use strict';
 
-import {combineReducers} from "redux";
-import {mobileMenuAnchorEL, profileMenuAnchorEL} from "./header/HeaderReducer";
-import {loginRegisterDialogReducer} from "./header/login/LoginRegisterDialogReducer";
-import {globalMessageReducer} from "./GlobalMessageReducer";
-import {authenticationReducer} from "./AuthenticationReducer";
+export const LOGOUT = 'LOGOUT';
 
-export default combineReducers({
-    header: combineReducers({
-        mobileMenuAnchorEL,
-        profileMenuAnchorEL,
-        loginRegisterDialog: loginRegisterDialogReducer
-    }),
-    authentication: authenticationReducer,
-    globalMessage: globalMessageReducer
-});
+export const logout = () => {
+    return {
+        type: LOGOUT,
+    }
+};

@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Router = ({authentication}) => {
+const Router = ({authentication, logout}) => {
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -60,6 +60,10 @@ const Router = ({authentication}) => {
                     <Switch>
                         <Route path='/home' component={HomePage} />
                         <PrivateRoute path='/about' component={AboutPage} authentication={authentication}  />
+                        <Route path='/logout' render={() => {
+                            logout();
+                            return (<Redirect to='/' />)
+                        }} />
                         <Redirect to="/home" />
                     </Switch>
                 </Grid>

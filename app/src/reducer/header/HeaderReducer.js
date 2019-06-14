@@ -18,12 +18,20 @@
 
 'use strict';
 
-import {TOGGLE_MOBILE_MENU} from "../../action/header/HeaderAction";
+import {TOGGLE_MOBILE_MENU, TOGGLE_PROFILE_MENU} from "../../action/header/HeaderAction";
 
 
 export const mobileMenuAnchorEL = (state=null, action) => {
     if (action.type === TOGGLE_MOBILE_MENU) {
         return action.mobileMenuAnchorEL;
+    }
+
+    return state;
+};
+
+export const profileMenuAnchorEL = (state=null, action) => {
+    if (action.type === TOGGLE_PROFILE_MENU) {
+        return action.profileMenuAnchorEL;
     }
 
     return state;

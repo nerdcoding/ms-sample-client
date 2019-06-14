@@ -1,5 +1,5 @@
 /*
- * MobileMenu.js
+ * ProfileMenu.js
  *
  * Copyright (c) 2019, Tobias Koltsch. All rights reserved.
  *
@@ -17,15 +17,17 @@
  */
 
 'use strict';
+
+
 import Popper from "@material-ui/core/Popper";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Link } from "react-router-dom";
 import React from "react";
-import * as PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
 import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -33,43 +35,46 @@ const useStyles = makeStyles(theme => ({
         zIndex: '1200', // menu needs to be in front of the appbar
     },
 }));
-
-/**
- * On small (mobile) screens the header doesn't not show the normal buttons but this MobileMenu instead. A MenuList will
- * contain the Header buttons.
- */
-function MobileMenu({mobileMenuAnchorEl, handleMobileMenuClose}) {
+function ProfileMenu({profileMenuAnchorEl, handleProfileMenuClose}) {
     const classes = useStyles();
-    const isMobileMenuOpen = Boolean(mobileMenuAnchorEl);
+    const isProfileMenuOpen = Boolean(profileMenuAnchorEl);
 
-    return(
-        <Popper open={isMobileMenuOpen}
-                anchorEl={mobileMenuAnchorEl}
+    return (
+        <Popper open={isProfileMenuOpen}
+                anchorEl={profileMenuAnchorEl}
                 transition disablePortal
                 className={classes.menu}
         >
             {({ TransitionProps, placement }) => (
                 <Grow
                     {...TransitionProps}
-                    id="mobile-menu"
+                    id="profile-menu"
                     style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                 >
                     <Paper>
-                        <ClickAwayListener onClickAway={handleMobileMenuClose}>
+                        <ClickAwayListener onClickAway={handleProfileMenuClose}>
                             <MenuList>
-                                <MenuItem onClick={handleMobileMenuClose}
+                                <MenuItem onClick={handleProfileMenuClose}
                                           component={React.forwardRef((props, ref) => (
-                                              <Link to="/home" {...props} ref={ref} />
+                                              <Link to="/profile" {...props} ref={ref} />
                                           ))}
                                 >
-                                    Home
+                                    Profile
                                 </MenuItem>
-                                <MenuItem onClick={handleMobileMenuClose}
+                                <MenuItem onClick={handleProfileMenuClose}
                                           component={React.forwardRef((props, ref) => (
-                                              <Link to="/about" {...props} ref={ref} />
+                                              <Link to="/account" {...props} ref={ref} />
                                           ))}
                                 >
-                                    About
+                                    My account
+                                </MenuItem>
+                                <Divider />
+                                <MenuItem onClick={handleProfileMenuClose}
+                                          component={React.forwardRef((props, ref) => (
+                                              <Link to="/logout" {...props} ref={ref} />
+                                          ))}
+                                >
+                                    Logout
                                 </MenuItem>
                             </MenuList>
                         </ClickAwayListener>
@@ -80,9 +85,4 @@ function MobileMenu({mobileMenuAnchorEl, handleMobileMenuClose}) {
     );
 }
 
-MobileMenu.propTypes = {
-    mobileMenuAnchorEl: PropTypes.object,
-    handleMobileMenuClose: PropTypes.func.isRequired
-};
-
-export default MobileMenu;
+export default ProfileMenu;

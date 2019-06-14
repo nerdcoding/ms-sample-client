@@ -19,7 +19,7 @@
 'use strict';
 
 import {combineReducers} from "redux";
-import {mobileMenuAnchorEL} from "./header/HeaderReducer";
+import {mobileMenuAnchorEL, profileMenuAnchorEL} from "./header/HeaderReducer";
 import {loginRegisterDialogReducer} from "./header/login/LoginRegisterDialogReducer";
 import {globalMessageReducer} from "./GlobalMessageReducer";
 import {handleLoginSuccessReducer} from "./AuthenticationReducer";
@@ -27,6 +27,7 @@ import {handleLoginSuccessReducer} from "./AuthenticationReducer";
 export default combineReducers({
     header: combineReducers({
         mobileMenuAnchorEL,
+        profileMenuAnchorEL,
         loginRegisterDialog: loginRegisterDialogReducer
     }),
     authentication: handleLoginSuccessReducer,

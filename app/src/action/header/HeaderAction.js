@@ -19,10 +19,18 @@
 'use strict';
 
 export const TOGGLE_MOBILE_MENU = 'TOGGLE_MOBILE_MENU';
+export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU';
 
 export const toggleMobileMenu = (mobileMenuAnchorEL) => {
     return {
         type: TOGGLE_MOBILE_MENU,
         mobileMenuAnchorEL
+    }
+};
+
+export const toggleProfileMenu = (profileMenuAnchorEL) => {
+    return {
+        type: TOGGLE_PROFILE_MENU,
+        profileMenuAnchorEL
     }
 };

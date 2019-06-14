@@ -28,6 +28,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import PersonIcon from "@material-ui/icons/Person";
 
 import MobileMenu from "./MobileMenu";
+import ProfileMenu from "./ProfileMenu";
 import LoginRegisterDialog from "./login/LoginRegisterDialog";
 
 const useStyles = makeStyles(theme => ({
@@ -74,7 +75,8 @@ const useStyles = makeStyles(theme => ({
 /**
  * Renders the navbar (AppBar) on the top of the screen containing all router buttons.
  */
-const NavigationBar = ({header, authentication, openMobileMenu, closeMobileMenu,
+const NavigationBar = ({header, authentication,
+        openMobileMenu, closeMobileMenu, openProfileMenu, closeProfileMenu,
         toggleLoginRegisterDialog, switchLoginRegisterDialogTab,
         handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation,
         handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) => {
@@ -122,7 +124,7 @@ const NavigationBar = ({header, authentication, openMobileMenu, closeMobileMenu,
                         <IconButton
                             className={classes.profileButton}
                             aria-haspopup="true"
-                            //onClick={this.handleProfileMenuOpen}
+                            onClick={e => openProfileMenu(e.currentTarget)}
                             color="inherit"
                         >
                             <PersonIcon />
@@ -155,6 +157,10 @@ const NavigationBar = ({header, authentication, openMobileMenu, closeMobileMenu,
             <MobileMenu
                 mobileMenuAnchorEl={header.mobileMenuAnchorEL}
                 handleMobileMenuClose={closeMobileMenu}
+            />
+            <ProfileMenu
+                profileMenuAnchorEl={header.profileMenuAnchorEL}
+                handleProfileMenuClose={closeProfileMenu}
             />
         </div>
     );

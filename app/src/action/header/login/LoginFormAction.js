@@ -122,6 +122,13 @@ export const handleLogin = (username, password) => {
             'Authorization': 'Basic ' + btoa(process.env.AUTH_SERVER_USER+':'+process.env.AUTH_SERVER_PASSWORD),
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        subsequentActions: [toggleLoginRegisterDialog(true)]
+        error: {
+            showErrorMessage: true,
+            errorMessageText: 'The provided username or password are incorrect. Please try again.',
+        },
+        subsequentActions: {
+            successActions: [toggleLoginRegisterDialog(true)],
+            errorActions: []
+        }
     });
 };

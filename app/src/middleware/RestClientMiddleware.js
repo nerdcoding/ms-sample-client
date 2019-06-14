@@ -50,16 +50,22 @@ export const restClientMiddleware = store => next => async action => {
                 type: restRequest.type + '_SUCCESS',
                 response: response.data
             });
-            restRequest.subsequentActions.forEach(function (item) {
+            restRequest.subsequentActions.successActions.forEach(function (item) {
                 next(item);
             });
         } catch (error) {
-            next(changeGlobalMessage({
-                isError: true,
-                showMessage: true,
-                messageText: restRequest.errorMessageText,
-                errorResponse: error,
-            }));
+            if (restRequest.error.showErrorMessage) {
+                next(changeGlobalMessage({
+                    isError: true,
+                    showMessage: true,
+                    messageText: restRequest.error.errorMessageText,
+                    errorResponse: error,
+                }));
+            }
+
+            restRequest.subsequentActions.errorActions.forEach(function (item) {
+                next(item);
+            });
         }
 
         next({

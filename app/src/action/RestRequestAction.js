@@ -31,8 +31,14 @@ export const requestRestEndpoint = (action) => {
         endpoint: null,
         payload: null,
         headers: {},
-        errorMessageText: 'The provided username or password are incorrect. Please try again.',
-        subsequentActions: []
+        error: {
+            showErrorMessage: true,
+            errorMessageText: '',
+        },
+        subsequentActions: {
+            successActions: [],
+            errorActions: []
+        }
     };
 
     return {

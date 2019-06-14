@@ -32,6 +32,14 @@ export const logout = (authentication) => {
         method: HttpMethod.DELETE,
         endpoint: process.env.AUTH_SERVER_URL + '/token' +
             '?access_token=' + authentication.access_token +
-            '&refresh_token=' + authentication.refresh_token
+            '&refresh_token=' + authentication.refresh_token,
+        error: {
+            showErrorMessage: false,
+            errorMessageText: '',
+        },
+        subsequentActions: {
+            successActions: [],
+            errorActions: [{ type: LOGOUT_SUCCESS }] // Even if logout failed at the server, logout at the client.
+        }
     });
 };

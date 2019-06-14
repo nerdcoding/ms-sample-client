@@ -22,6 +22,7 @@ import {REST_REQUEST} from "../action/RestRequestAction";
 import * as axios from "axios";
 import {REST_REQUEST_TIMEOUT} from "../service/Constants";
 import {changeGlobalMessage} from "../action/GlobalMessageAction";
+import {AuthenticationType} from "./auth/AuthenticationType";
 
 export const restClientMiddleware = store => next => async action => {
     if (action[REST_REQUEST]) {
@@ -31,6 +32,11 @@ export const restClientMiddleware = store => next => async action => {
             type: restRequest.type + '_IS_LOADING',
             isLoading: true
         });
+
+        if (restRequest.authenticationType === AuthenticationType.BEARER) {
+            restRequest.headers['Authorization'] =
+                'Bearer ' + store.getState().authentication.access_token
+        }
 
         try {
             const response = await axios({

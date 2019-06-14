@@ -20,7 +20,7 @@
 
 
 import {LOGIN_SUCCESS} from "../action/header/login/LoginFormAction";
-import {LOGOUT} from "../action/header/logout/LogoutAction";
+import { LOGOUT_SUCCESS} from "../action/header/logout/LogoutAction";
 
 export const initialAuthentication = {
     access_token: null,
@@ -36,7 +36,7 @@ export const authenticationReducer = (state=initialAuthentication, action) => {
                 refresh_token: action.response.refresh_token,
                 user_id: action.response.user_id
             };
-        case LOGOUT:
+        case LOGOUT_SUCCESS:
             return initialAuthentication;
         default:
             return state;

@@ -18,10 +18,20 @@
 
 'use strict';
 
-export const LOGOUT = 'LOGOUT';
+import {requestRestEndpoint} from "../../RestRequestAction";
+import {AuthenticationType} from "../../../middleware/auth/AuthenticationType";
+import {HttpMethod} from "../../../middleware/HttpMethod";
 
-export const logout = () => {
-    return {
+export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+
+export const logout = (authentication) => {
+    return requestRestEndpoint({
         type: LOGOUT,
-    }
+        authenticationType: AuthenticationType.BEARER,
+        method: HttpMethod.DELETE,
+        endpoint: process.env.AUTH_SERVER_URL + '/token' +
+            '?access_token=' + authentication.access_token +
+            '&refresh_token=' + authentication.refresh_token
+    });
 };

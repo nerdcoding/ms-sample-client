@@ -29,17 +29,17 @@ import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
 const EMAIL_FIELD_NAME = 'email';
 const PASSWORD_FIELD_NAME = 'password';
 
-export const CHANGE_EMAIL_FIELD = 'CHANGE_EMAIL_FIELD';
-export const VALIDATE_EMAIL_FIELD = 'VALIDATE_EMAIL_FIELD';
-export const CHANGE_PASSWORD_FIELD = 'CHANGE_PASSWORD_FIELD';
-export const VALIDATE_PASSWORD_FIELD = 'VALIDATE_PASSWORD_FIELD';
+export const CHANGE_LOGIN_FORM_EMAIL_FIELD = 'CHANGE_LOGIN_FORM_EMAIL_FIELD';
+export const VALIDATE_LOGIN_FORM_EMAIL_FIELD = 'VALIDATE_LOGIN_FORM_EMAIL_FIELD';
+export const CHANGE_LOGIN_FORM_PASSWORD_FIELD = 'CHANGE_LOGIN_FORM_PASSWORD_FIELD';
+export const VALIDATE_LOGIN_FORM_PASSWORD_FIELD = 'VALIDATE_LOGIN_FORM_PASSWORD_FIELD';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_IS_LOADING = 'LOGIN_IS_LOADING';
 
 export const changeLoginFormEmailField = (emailField, newValue) => {
     return {
-        type: CHANGE_EMAIL_FIELD,
+        type: CHANGE_LOGIN_FORM_EMAIL_FIELD,
         emailField: {
             value: newValue,
             valid: true, // Always valid during changing, validation is done afterwards.
@@ -60,7 +60,7 @@ export const validateLoginFormEmailField = (emailField) => {
     }
 
     return {
-        type: VALIDATE_EMAIL_FIELD,
+        type: VALIDATE_LOGIN_FORM_EMAIL_FIELD,
         emailField: {
             value: emailField.value,
             valid: validationResult.valid,
@@ -73,7 +73,7 @@ export const validateLoginFormEmailField = (emailField) => {
 
 export const changeLoginFormPasswordField = (passwordField, newValue) => {
     return {
-        type: CHANGE_PASSWORD_FIELD,
+        type: CHANGE_LOGIN_FORM_PASSWORD_FIELD,
         passwordField: {
             value: newValue,
             valid: true, // Always valid during changing, validation is done afterwards.
@@ -96,7 +96,7 @@ export const validateLoginFormPasswordField = (passwordField) => {
     }
 
     return {
-        type: VALIDATE_PASSWORD_FIELD,
+        type: VALIDATE_LOGIN_FORM_PASSWORD_FIELD,
         passwordField: {
             value: passwordField.value,
             valid: validationResult.valid,

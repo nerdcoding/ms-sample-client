@@ -19,14 +19,14 @@
 'use strict';
 
 import {
-    CHANGE_EMAIL_FIELD, CHANGE_PASSWORD_FIELD,
-    LOGIN_IS_LOADING, VALIDATE_EMAIL_FIELD, VALIDATE_PASSWORD_FIELD
+    CHANGE_LOGIN_FORM_EMAIL_FIELD, CHANGE_LOGIN_FORM_PASSWORD_FIELD,
+    LOGIN_IS_LOADING, VALIDATE_LOGIN_FORM_EMAIL_FIELD, VALIDATE_LOGIN_FORM_PASSWORD_FIELD
 } from "../../../action/header/login/LoginFormAction";
 
 export const loginFormReducer = (loginForm, action) => {
     switch (action.type) {
-        case CHANGE_EMAIL_FIELD:
-        case VALIDATE_EMAIL_FIELD:
+        case CHANGE_LOGIN_FORM_EMAIL_FIELD:
+        case VALIDATE_LOGIN_FORM_EMAIL_FIELD:
             return {
                 ...loginForm,
                 emailField: {
@@ -37,8 +37,8 @@ export const loginFormReducer = (loginForm, action) => {
                     name: action.emailField.name
                 }
             };
-        case CHANGE_PASSWORD_FIELD:
-        case VALIDATE_PASSWORD_FIELD:
+        case CHANGE_LOGIN_FORM_PASSWORD_FIELD:
+        case VALIDATE_LOGIN_FORM_PASSWORD_FIELD:
             return {
                 ...loginForm,
                 passwordField: {

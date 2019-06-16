@@ -37,7 +37,7 @@ export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_IS_LOADING = 'LOGIN_IS_LOADING';
 
-export const changeEmailField = (emailField, newValue) => {
+export const changeLoginFormEmailField = (emailField, newValue) => {
     return {
         type: CHANGE_EMAIL_FIELD,
         emailField: {
@@ -50,7 +50,7 @@ export const changeEmailField = (emailField, newValue) => {
     }
 };
 
-export const validateEmailField = (emailField) => {
+export const validateLoginFormEmailField = (emailField) => {
     let validationResult = {
         valid: true,
         errorMessage: ''
@@ -71,7 +71,7 @@ export const validateEmailField = (emailField) => {
     }
 };
 
-export const changePasswordField = (passwordField, newValue) => {
+export const changeLoginFormPasswordField = (passwordField, newValue) => {
     return {
         type: CHANGE_PASSWORD_FIELD,
         passwordField: {
@@ -84,7 +84,7 @@ export const changePasswordField = (passwordField, newValue) => {
     }
 };
 
-export const validatePasswordField = (passwordField) => {
+export const validateLoginFormPasswordField = (passwordField) => {
     let validationResult = {
         valid: true,
         errorMessage: ''

@@ -24,11 +24,11 @@ import NavigationBar from "../presentational/header/NavigationBar";
 import {toggleMobileMenu, toggleProfileMenu} from "../../action/header/HeaderAction";
 import {toggleLoginRegisterDialog, switchLoginRegisterDialogTab} from "../../action/header/login/LoginRegisterAction";
 import {
-    changeEmailField,
-    changePasswordField,
+    changeLoginFormEmailField,
+    changeLoginFormPasswordField,
     handleLogin,
-    validateEmailField,
-    validatePasswordField
+    validateLoginFormEmailField,
+    validateLoginFormPasswordField
 } from "../../action/header/login/LoginFormAction";
 import React from "react";
 
@@ -46,10 +46,10 @@ const mapDispatchToProps = dispatch => ({
     switchLoginRegisterDialogTab: selectedTab => dispatch(switchLoginRegisterDialogTab(selectedTab)),
 
     handleLogin: (username, password) => dispatch(handleLogin(username, password)),
-    handleLoginFormEmailChange: (emailField, newValue) => dispatch(changeEmailField(emailField, newValue)),
-    handleLoginFormEmailValidation: emailField => dispatch(validateEmailField(emailField)),
-    handleLoginFormPasswordChange: (passwordField, newValue) => dispatch(changePasswordField(passwordField, newValue)),
-    handleLoginFormPasswordValidation: passwordField => dispatch(validatePasswordField(passwordField)),
+    handleLoginFormEmailChange: (emailField, newValue) => dispatch(changeLoginFormEmailField(emailField, newValue)),
+    handleLoginFormEmailValidation: emailField => dispatch(validateLoginFormEmailField(emailField)),
+    handleLoginFormPasswordChange: (passwordField, newValue) => dispatch(changeLoginFormPasswordField(passwordField, newValue)),
+    handleLoginFormPasswordValidation: passwordField => dispatch(validateLoginFormPasswordField(passwordField)),
 });
 
 

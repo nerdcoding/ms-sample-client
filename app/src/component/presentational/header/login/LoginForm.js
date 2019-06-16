@@ -113,7 +113,6 @@ LoginForm.propTypes = {
     loginForm: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
     onLogin: PropTypes.func.isRequired,
-    handleLogin: PropTypes.func.isRequired,
     handleLoginFormEmailChange: PropTypes.func.isRequired,
     handleLoginFormEmailValidation: PropTypes.func.isRequired,
     handleLoginFormPasswordChange: PropTypes.func.isRequired,

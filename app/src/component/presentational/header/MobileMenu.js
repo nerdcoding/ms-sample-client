@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
  * On small (mobile) screens the header doesn't not show the normal buttons but this MobileMenu instead. A MenuList will
  * contain the Header buttons.
  */
-function MobileMenu({mobileMenuAnchorEl, handleMobileMenuClose}) {
+function MobileMenu({authentication, mobileMenuAnchorEl, handleMobileMenuClose}) {
     const classes = useStyles();
     const isMobileMenuOpen = Boolean(mobileMenuAnchorEl);
 
@@ -64,13 +64,15 @@ function MobileMenu({mobileMenuAnchorEl, handleMobileMenuClose}) {
                                 >
                                     Home
                                 </MenuItem>
-                                <MenuItem onClick={handleMobileMenuClose}
-                                          component={React.forwardRef((props, ref) => (
-                                              <Link to="/about" {...props} ref={ref} />
-                                          ))}
-                                >
-                                    About
-                                </MenuItem>
+                                {   isLoggedIn(authentication) &&
+                                    <MenuItem onClick={handleMobileMenuClose}
+                                              component={React.forwardRef((props, ref) => (
+                                                  <Link to="/about" {...props} ref={ref}/>
+                                              ))}
+                                    >
+                                        About
+                                    </MenuItem>
+                                }
                             </MenuList>
                         </ClickAwayListener>
                     </Paper>
@@ -81,8 +83,13 @@ function MobileMenu({mobileMenuAnchorEl, handleMobileMenuClose}) {
 }
 
 MobileMenu.propTypes = {
+    authentication: PropTypes.object,
     mobileMenuAnchorEl: PropTypes.object,
     handleMobileMenuClose: PropTypes.func.isRequired
 };
 
 export default MobileMenu;
+
+const isLoggedIn = (authentication) => {
+    return authentication && authentication.access_token;
+};

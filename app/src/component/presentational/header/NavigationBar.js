@@ -156,6 +156,7 @@ const NavigationBar = ({header, authentication,
             </AppBar>
 
             <MobileMenu
+                authentication={authentication}
                 mobileMenuAnchorEl={header.mobileMenuAnchorEL}
                 handleMobileMenuClose={closeMobileMenu}
             />

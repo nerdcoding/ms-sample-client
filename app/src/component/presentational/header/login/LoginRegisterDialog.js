@@ -36,9 +36,20 @@ const useStyles = makeStyles(theme => ({
 /**
  * Defines a dialog (opened by the NavigationBar) for login and registration.
  */
-function LoginRegisterDialog({isOpen, selectedTab, loginForm, handleDialogToggle, handleTabSwitch,
-        handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation,
-        handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) {
+function LoginRegisterDialog({isOpen, selectedTab,
+        handleDialogToggle, handleTabSwitch,
+        loginForm, handleLogin,
+        handleLoginFormEmailChange, handleLoginFormEmailValidation,
+        handleLoginFormPasswordChange, handleLoginFormPasswordValidation,
+        registerForm, handleRegister,
+        handleRegisterFormFirstNameChange, handleRegisterFormFirstNameValidation,
+        handleRegisterFormLastNameChange, handleRegisterFormLastNameValidation,
+        handleRegisterFormGenderChange, handleRegisterFormDayOfBirthChange,
+        handleRegisterFormEmailChange, handleRegisterFormEmailValidation,
+        handleRegisterFormUsernameChange, handleRegisterFormUsernameValidation,
+        handleRegisterFormPasswordChange, handleRegisterFormPasswordValidation,
+        handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation
+        }) {
     const classes = useStyles();
     return (
         <div>
@@ -75,7 +86,25 @@ function LoginRegisterDialog({isOpen, selectedTab, loginForm, handleDialogToggle
                         handleLoginFormPasswordChange={handleLoginFormPasswordChange}
                         handleLoginFormPasswordValidation={handleLoginFormPasswordValidation}
                       />
-                    : <RegisterForm />
+                    : <RegisterForm
+                        registerForm={registerForm}
+                        onClose={() => handleDialogToggle(isOpen)}
+                        onRegister={handleRegister}
+                        handleRegisterFormFirstNameChange={handleRegisterFormFirstNameChange}
+                        handleRegisterFormFirstNameValidation={handleRegisterFormFirstNameValidation}
+                        handleRegisterFormLastNameChange={handleRegisterFormLastNameChange}
+                        handleRegisterFormLastNameValidation={handleRegisterFormLastNameValidation}
+                        handleRegisterFormGenderChange={handleRegisterFormGenderChange}
+                        handleRegisterFormDayOfBirthChange={handleRegisterFormDayOfBirthChange}
+                        handleRegisterFormEmailChange={handleRegisterFormEmailChange}
+                        handleRegisterFormEmailValidation={handleRegisterFormEmailValidation}
+                        handleRegisterFormUsernameChange={handleRegisterFormUsernameChange}
+                        handleRegisterFormUsernameValidation={handleRegisterFormUsernameValidation}
+                        handleRegisterFormPasswordChange={handleRegisterFormPasswordChange}
+                        handleRegisterFormPasswordValidation={handleRegisterFormPasswordValidation}
+                        handleRegisterFormRepeatPasswordChange={handleRegisterFormRepeatPasswordChange}
+                        handleRegisterFormRepeatPasswordValidation={handleRegisterFormRepeatPasswordValidation}
+                      />
                 }
             </Dialog>
         </div>
@@ -85,6 +114,7 @@ function LoginRegisterDialog({isOpen, selectedTab, loginForm, handleDialogToggle
 LoginRegisterDialog.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     selectedTab: PropTypes.number.isRequired,
+
     loginForm: PropTypes.object.isRequired,
     handleDialogToggle: PropTypes.func.isRequired,
     handleTabSwitch: PropTypes.func.isRequired,
@@ -93,6 +123,23 @@ LoginRegisterDialog.propTypes = {
     handleLoginFormEmailValidation: PropTypes.func.isRequired,
     handleLoginFormPasswordChange: PropTypes.func.isRequired,
     handleLoginFormPasswordValidation: PropTypes.func.isRequired,
+
+    registerForm: PropTypes.object.isRequired,
+    handleRegister: PropTypes.func.isRequired,
+    handleRegisterFormFirstNameChange: PropTypes.func.isRequired,
+    handleRegisterFormFirstNameValidation: PropTypes.func.isRequired,
+    handleRegisterFormLastNameChange: PropTypes.func.isRequired,
+    handleRegisterFormLastNameValidation: PropTypes.func.isRequired,
+    handleRegisterFormGenderChange: PropTypes.func.isRequired,
+    handleRegisterFormDayOfBirthChange: PropTypes.func.isRequired,
+    handleRegisterFormEmailChange: PropTypes.func.isRequired,
+    handleRegisterFormEmailValidation: PropTypes.func.isRequired,
+    handleRegisterFormUsernameChange: PropTypes.func.isRequired,
+    handleRegisterFormUsernameValidation: PropTypes.func.isRequired,
+    handleRegisterFormPasswordChange: PropTypes.func.isRequired,
+    handleRegisterFormPasswordValidation: PropTypes.func.isRequired,
+    handleRegisterFormRepeatPasswordChange: PropTypes.func.isRequired,
+    handleRegisterFormRepeatPasswordValidation: PropTypes.func.isRequired,
 };
 
 export default LoginRegisterDialog;

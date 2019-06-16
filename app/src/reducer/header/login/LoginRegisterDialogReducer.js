@@ -27,6 +27,23 @@ import {
     handleLoginIsLoadingReducer,
     loginFormReducer
 } from "./LoginFormReducer";
+import {
+    CHANGE_REGISTER_FORM_DAY_OF_BIRTH_FIELD,
+    CHANGE_REGISTER_FORM_EMAIL_FIELD,
+    CHANGE_REGISTER_FORM_FIRST_NAME_FIELD,
+    CHANGE_REGISTER_FORM_GENDER_FIELD,
+    CHANGE_REGISTER_FORM_LAST_NAME_FIELD,
+    CHANGE_REGISTER_FORM_PASSWORD_FIELD,
+    CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
+    CHANGE_REGISTER_FORM_USERNAME_FIELD, REGISTER_IS_LOADING,
+    VALIDATE_REGISTER_FORM_EMAIL_FIELD,
+    VALIDATE_REGISTER_FORM_FIRST_NAME_FIELD,
+    VALIDATE_REGISTER_FORM_LAST_NAME_FIELD,
+    VALIDATE_REGISTER_FORM_PASSWORD_FIELD, VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
+    VALIDATE_REGISTER_FORM_USERNAME_FIELD
+} from "../../../action/header/login/RegisterFormAction";
+import {handleRegisterIsLoadingReducer, registerFormReducer} from "./RegisterFormReducer";
+import moment from "moment";
 
 const initialState = {
     isOpen: false,
@@ -47,6 +64,65 @@ const initialState = {
             name: 'password'
         },
         onLoginLoading: false
+    },
+    registerForm: {
+        firstNameField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'firstName'
+        },
+        lastNameField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'lastName'
+        },
+        genderField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'gender'
+        },
+        dayOfBirthField: {
+            value: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'dayOfBirth'
+        },
+        emailField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'email'
+        },
+        usernameField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'username'
+        },
+        passwordField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'password'
+        },
+        repeatPasswordField: {
+            value: '',
+            valid: true,
+            validationRequired: false,
+            errorMessage: '',
+            name: 'repeatPassword'
+        },
+        onRegisterLoading: false
     }
 };
 
@@ -69,6 +145,29 @@ export const loginRegisterDialogReducer = (state=initialState, action) => {
             return {
                 ...state,
                 loginForm: handleLoginIsLoadingReducer(state.loginForm, action)
+            };
+        case CHANGE_REGISTER_FORM_FIRST_NAME_FIELD:
+        case VALIDATE_REGISTER_FORM_FIRST_NAME_FIELD:
+        case CHANGE_REGISTER_FORM_LAST_NAME_FIELD:
+        case VALIDATE_REGISTER_FORM_LAST_NAME_FIELD:
+        case CHANGE_REGISTER_FORM_GENDER_FIELD:
+        case CHANGE_REGISTER_FORM_DAY_OF_BIRTH_FIELD:
+        case CHANGE_REGISTER_FORM_EMAIL_FIELD:
+        case VALIDATE_REGISTER_FORM_EMAIL_FIELD:
+        case CHANGE_REGISTER_FORM_USERNAME_FIELD:
+        case VALIDATE_REGISTER_FORM_USERNAME_FIELD:
+        case CHANGE_REGISTER_FORM_PASSWORD_FIELD:
+        case VALIDATE_REGISTER_FORM_PASSWORD_FIELD:
+        case CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:
+        case VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:
+            return {
+                ...state,
+                registerForm: registerFormReducer(state.registerForm, action)
+            };
+        case REGISTER_IS_LOADING:
+            return {
+                ...state,
+                registerForm: handleRegisterIsLoadingReducer(state.registerForm, action)
             };
         default:
             return state;

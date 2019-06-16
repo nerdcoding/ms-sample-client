@@ -25,8 +25,8 @@ import {Provider} from "react-redux";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import MomentUtils from "@date-io/moment";
 
 import theme from "./../theme";

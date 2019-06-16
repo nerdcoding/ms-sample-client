@@ -31,6 +31,21 @@ import {
     validateLoginFormPasswordField
 } from "../../action/header/login/LoginFormAction";
 import React from "react";
+import {
+    changeRegisterFormDayOfBirthField,
+    changeRegisterFormEmailField,
+    changeRegisterFormFirstNameField,
+    changeRegisterFormGenderField,
+    changeRegisterFormLastNameField,
+    changeRegisterFormPasswordField,
+    changeRegisterFormRepeatPasswordField,
+    changeRegisterFormUsernameField, handleRegister,
+    validateRegisterFormEmailField,
+    validateRegisterFormFirstNameField,
+    validateRegisterFormLastNameField,
+    validateRegisterFormPasswordField, validateRegisterFormRepeatPasswordField,
+    validateRegisterFormUsernameField
+} from "../../action/header/login/RegisterFormAction";
 
 const mapStateToProps = state => ({
     header: state.header,
@@ -50,6 +65,22 @@ const mapDispatchToProps = dispatch => ({
     handleLoginFormEmailValidation: emailField => dispatch(validateLoginFormEmailField(emailField)),
     handleLoginFormPasswordChange: (passwordField, newValue) => dispatch(changeLoginFormPasswordField(passwordField, newValue)),
     handleLoginFormPasswordValidation: passwordField => dispatch(validateLoginFormPasswordField(passwordField)),
+
+    handleRegister: (registerForm) => dispatch(handleRegister(registerForm)),
+    handleRegisterFormFirstNameChange: (firstNameField, newValue) => dispatch(changeRegisterFormFirstNameField(firstNameField, newValue)),
+    handleRegisterFormFirstNameValidation: (firstNameField, newValue) => dispatch(validateRegisterFormFirstNameField(firstNameField, newValue)),
+    handleRegisterFormLastNameChange: (lastNameField, newValue) => dispatch(changeRegisterFormLastNameField(lastNameField, newValue)),
+    handleRegisterFormLastNameValidation: (lastNameField, newValue) => dispatch(validateRegisterFormLastNameField(lastNameField, newValue)),
+    handleRegisterFormGenderChange: (genderField, newValue) => dispatch(changeRegisterFormGenderField(genderField, newValue)),
+    handleRegisterFormDayOfBirthChange: (dayOfBirthField, event) => dispatch(changeRegisterFormDayOfBirthField(dayOfBirthField, event)),
+    handleRegisterFormEmailChange: (emailField, newValue) => dispatch(changeRegisterFormEmailField(emailField, newValue)),
+    handleRegisterFormEmailValidation: (emailField, newValue) => dispatch(validateRegisterFormEmailField(emailField, newValue)),
+    handleRegisterFormUsernameChange: (usernameField, newValue) => dispatch(changeRegisterFormUsernameField(usernameField, newValue)),
+    handleRegisterFormUsernameValidation: (usernameField, newValue) => dispatch(validateRegisterFormUsernameField(usernameField, newValue)),
+    handleRegisterFormPasswordChange: (passwordField, newValue) => dispatch(changeRegisterFormPasswordField(passwordField, newValue)),
+    handleRegisterFormPasswordValidation: (passwordField, newValue) => dispatch(validateRegisterFormPasswordField(passwordField, newValue)),
+    handleRegisterFormRepeatPasswordChange: (repeatPasswordField, newValue) => dispatch(changeRegisterFormRepeatPasswordField(repeatPasswordField, newValue)),
+    handleRegisterFormRepeatPasswordValidation: (repeatPasswordField, newValue) => dispatch(validateRegisterFormRepeatPasswordField(repeatPasswordField, newValue)),
 });
 
 

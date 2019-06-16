@@ -31,8 +31,12 @@ export const requestRestEndpoint = (action) => {
         endpoint: null,
         payload: null,
         headers: {},
+        success: {
+            showSuccessMessage: false,
+            successMessageText: '',
+        },
         error: {
-            showErrorMessage: true,
+            showErrorMessage: false,
             errorMessageText: '',
         },
         subsequentActions: {

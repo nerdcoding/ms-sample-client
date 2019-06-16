@@ -79,8 +79,20 @@ const useStyles = makeStyles(theme => ({
 const NavigationBar = ({header, authentication,
         openMobileMenu, closeMobileMenu, openProfileMenu, closeProfileMenu,
         toggleLoginRegisterDialog, switchLoginRegisterDialogTab,
-        handleLogin, handleLoginFormEmailChange, handleLoginFormEmailValidation,
-        handleLoginFormPasswordChange, handleLoginFormPasswordValidation}) => {
+
+        handleLogin,
+        handleLoginFormEmailChange, handleLoginFormEmailValidation,
+        handleLoginFormPasswordChange, handleLoginFormPasswordValidation,
+
+        handleRegister,
+        handleRegisterFormFirstNameChange, handleRegisterFormFirstNameValidation,
+        handleRegisterFormLastNameChange, handleRegisterFormLastNameValidation,
+        handleRegisterFormGenderChange, handleRegisterFormDayOfBirthChange,
+        handleRegisterFormEmailChange, handleRegisterFormEmailValidation,
+        handleRegisterFormUsernameChange, handleRegisterFormUsernameValidation,
+        handleRegisterFormPasswordChange, handleRegisterFormPasswordValidation,
+        handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation,
+        }) => {
     const classes = useStyles();
     return(
         <div className={classes.root}>
@@ -143,15 +155,34 @@ const NavigationBar = ({header, authentication,
 
                     <LoginRegisterDialog isOpen={header.loginRegisterDialog.isOpen}
                                          selectedTab={header.loginRegisterDialog.selectedTab}
-                                         loginForm={header.loginRegisterDialog.loginForm}
                                          handleDialogToggle={toggleLoginRegisterDialog}
                                          handleTabSwitch={switchLoginRegisterDialogTab}
+
+                                         loginForm={header.loginRegisterDialog.loginForm}
                                          handleLogin={handleLogin}
                                          handleLoginFormEmailChange={handleLoginFormEmailChange}
                                          handleLoginFormEmailValidation={handleLoginFormEmailValidation}
                                          handleLoginFormPasswordChange={handleLoginFormPasswordChange}
                                          handleLoginFormPasswordValidation={handleLoginFormPasswordValidation}
+
+                                         registerForm={header.loginRegisterDialog.registerForm}
+                                         handleRegister={handleRegister}
+                                         handleRegisterFormFirstNameChange={handleRegisterFormFirstNameChange}
+                                         handleRegisterFormFirstNameValidation={handleRegisterFormFirstNameValidation}
+                                         handleRegisterFormLastNameChange={handleRegisterFormLastNameChange}
+                                         handleRegisterFormLastNameValidation={handleRegisterFormLastNameValidation}
+                                         handleRegisterFormGenderChange={handleRegisterFormGenderChange}
+                                         handleRegisterFormDayOfBirthChange={handleRegisterFormDayOfBirthChange}
+                                         handleRegisterFormEmailChange={handleRegisterFormEmailChange}
+                                         handleRegisterFormEmailValidation={handleRegisterFormEmailValidation}
+                                         handleRegisterFormUsernameChange={handleRegisterFormUsernameChange}
+                                         handleRegisterFormUsernameValidation={handleRegisterFormUsernameValidation}
+                                         handleRegisterFormPasswordChange={handleRegisterFormPasswordChange}
+                                         handleRegisterFormPasswordValidation={handleRegisterFormPasswordValidation}
+                                         handleRegisterFormRepeatPasswordChange={handleRegisterFormRepeatPasswordChange}
+                                         handleRegisterFormRepeatPasswordValidation={handleRegisterFormRepeatPasswordValidation}
                     />
+
                 </Toolbar>
             </AppBar>
 
@@ -176,11 +207,28 @@ NavigationBar.propTypes = {
     closeProfileMenu: PropTypes.func.isRequired,
     toggleLoginRegisterDialog: PropTypes.func.isRequired,
     switchLoginRegisterDialogTab: PropTypes.func.isRequired,
+
     handleLogin: PropTypes.func.isRequired,
     handleLoginFormEmailChange: PropTypes.func.isRequired,
     handleLoginFormEmailValidation: PropTypes.func.isRequired,
     handleLoginFormPasswordChange: PropTypes.func.isRequired,
     handleLoginFormPasswordValidation: PropTypes.func.isRequired,
+
+    handleRegister: PropTypes.func.isRequired,
+    handleRegisterFormFirstNameChange: PropTypes.func.isRequired,
+    handleRegisterFormFirstNameValidation: PropTypes.func.isRequired,
+    handleRegisterFormLastNameChange: PropTypes.func.isRequired,
+    handleRegisterFormLastNameValidation: PropTypes.func.isRequired,
+    handleRegisterFormGenderChange: PropTypes.func.isRequired,
+    handleRegisterFormDayOfBirthChange: PropTypes.func.isRequired,
+    handleRegisterFormEmailChange: PropTypes.func.isRequired,
+    handleRegisterFormEmailValidation: PropTypes.func.isRequired,
+    handleRegisterFormUsernameChange: PropTypes.func.isRequired,
+    handleRegisterFormUsernameValidation: PropTypes.func.isRequired,
+    handleRegisterFormPasswordChange: PropTypes.func.isRequired,
+    handleRegisterFormPasswordValidation: PropTypes.func.isRequired,
+    handleRegisterFormRepeatPasswordChange: PropTypes.func.isRequired,
+    handleRegisterFormRepeatPasswordValidation: PropTypes.func.isRequired,
 };
 
 export default NavigationBar;

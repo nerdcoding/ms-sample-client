@@ -171,6 +171,8 @@ NavigationBar.propTypes = {
     header: PropTypes.object.isRequired,
     openMobileMenu: PropTypes.func.isRequired,
     closeMobileMenu: PropTypes.func.isRequired,
+    openProfileMenu: PropTypes.func.isRequired,
+    closeProfileMenu: PropTypes.func.isRequired,
     toggleLoginRegisterDialog: PropTypes.func.isRequired,
     switchLoginRegisterDialogTab: PropTypes.func.isRequired,
     handleLogin: PropTypes.func.isRequired,

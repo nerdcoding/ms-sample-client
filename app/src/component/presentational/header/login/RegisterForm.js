@@ -246,7 +246,7 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                                 }}
                                 onBlur={e => {
                                     e.preventDefault();
-                                    handleRegisterFormRepeatPasswordValidation(registerForm.repeatPasswordField);
+                                    handleRegisterFormRepeatPasswordValidation(registerForm.repeatPasswordField, registerForm.passwordField);
                                 }}
                                 margin="dense"
                                 fullWidth

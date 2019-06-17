@@ -290,13 +290,18 @@ export const changeRegisterFormRepeatPasswordField = (repeatPasswordField, newVa
     }
 };
 
-export const validateRegisterFormRepeatPasswordField = (repeatPasswordField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (repeatPasswordField.validationRequired) {
-        //validationResult = InputFieldValidationService.validateEmail(emailField.value);
+export const validateRegisterFormRepeatPasswordField = (repeatPasswordField, passwordField) => {
+    let validationResult;
+    if (repeatPasswordField.value !== passwordField.value) {
+        validationResult =  {
+            valid: false,
+            errorMessage: 'The passwords do not match.'
+        };
+    } else {
+        validationResult = {
+            valid: true,
+            errorMessage: ''
+        };
     }
 
     return {

@@ -81,7 +81,7 @@ const initialState = {
             name: 'lastName'
         },
         genderField: {
-            value: '',
+            value: 'FEMALE',
             valid: true,
             validationRequired: false,
             errorMessage: '',

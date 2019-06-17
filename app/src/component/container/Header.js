@@ -68,19 +68,19 @@ const mapDispatchToProps = dispatch => ({
 
     handleRegister: (registerForm) => dispatch(handleRegister(registerForm)),
     handleRegisterFormFirstNameChange: (firstNameField, newValue) => dispatch(changeRegisterFormFirstNameField(firstNameField, newValue)),
-    handleRegisterFormFirstNameValidation: (firstNameField, newValue) => dispatch(validateRegisterFormFirstNameField(firstNameField, newValue)),
+    handleRegisterFormFirstNameValidation: (firstNameField) => dispatch(validateRegisterFormFirstNameField(firstNameField)),
     handleRegisterFormLastNameChange: (lastNameField, newValue) => dispatch(changeRegisterFormLastNameField(lastNameField, newValue)),
-    handleRegisterFormLastNameValidation: (lastNameField, newValue) => dispatch(validateRegisterFormLastNameField(lastNameField, newValue)),
+    handleRegisterFormLastNameValidation: (lastNameField) => dispatch(validateRegisterFormLastNameField(lastNameField)),
     handleRegisterFormGenderChange: (genderField, newValue) => dispatch(changeRegisterFormGenderField(genderField, newValue)),
     handleRegisterFormDayOfBirthChange: (dayOfBirthField, event) => dispatch(changeRegisterFormDayOfBirthField(dayOfBirthField, event)),
     handleRegisterFormEmailChange: (emailField, newValue) => dispatch(changeRegisterFormEmailField(emailField, newValue)),
-    handleRegisterFormEmailValidation: (emailField, newValue) => dispatch(validateRegisterFormEmailField(emailField, newValue)),
+    handleRegisterFormEmailValidation: (emailField) => dispatch(validateRegisterFormEmailField(emailField)),
     handleRegisterFormUsernameChange: (usernameField, newValue) => dispatch(changeRegisterFormUsernameField(usernameField, newValue)),
-    handleRegisterFormUsernameValidation: (usernameField, newValue) => dispatch(validateRegisterFormUsernameField(usernameField, newValue)),
+    handleRegisterFormUsernameValidation: (usernameField) => dispatch(validateRegisterFormUsernameField(usernameField)),
     handleRegisterFormPasswordChange: (passwordField, newValue) => dispatch(changeRegisterFormPasswordField(passwordField, newValue)),
-    handleRegisterFormPasswordValidation: (passwordField, newValue) => dispatch(validateRegisterFormPasswordField(passwordField, newValue)),
+    handleRegisterFormPasswordValidation: (passwordField, passwordStrength) => dispatch(validateRegisterFormPasswordField(passwordField, passwordStrength)),
     handleRegisterFormRepeatPasswordChange: (repeatPasswordField, newValue) => dispatch(changeRegisterFormRepeatPasswordField(repeatPasswordField, newValue)),
-    handleRegisterFormRepeatPasswordValidation: (repeatPasswordField, newValue) => dispatch(validateRegisterFormRepeatPasswordField(repeatPasswordField, newValue)),
+    handleRegisterFormRepeatPasswordValidation: (repeatPasswordField) => dispatch(validateRegisterFormRepeatPasswordField(repeatPasswordField)),
 });
 
 

@@ -22,9 +22,8 @@ import InputFieldValidationService from "../../../service/validation/InputFieldV
 import {requestRestEndpoint} from "../../RestRequestAction";
 import {AuthenticationType} from "../../../middleware/auth/AuthenticationType";
 import {HttpMethod} from "../../../middleware/HttpMethod";
-import * as qs from "qs";
 import {toggleLoginRegisterDialog} from "./LoginRegisterAction";
-import {LOGIN} from "./LoginFormAction";
+import PasswordStrengthValidationService from "../../../service/validation/PasswordStrengthValidationService";
 
 
 const FIRST_NAME_FIELD_NAME = 'firstName';
@@ -42,8 +41,8 @@ export const CHANGE_REGISTER_FORM_LAST_NAME_FIELD = 'CHANGE_REGISTER_FORM_LAST_N
 export const VALIDATE_REGISTER_FORM_LAST_NAME_FIELD = 'VALIDATE_REGISTER_FORM_LAST_NAME_FIELD';
 export const CHANGE_REGISTER_FORM_GENDER_FIELD = 'CHANGE_REGISTER_FORM_GENDER_FIELD';
 export const CHANGE_REGISTER_FORM_DAY_OF_BIRTH_FIELD = 'CHANGE_REGISTER_FORM_DAY_OF_BIRTH_FIELD';
-export const CHANGE_REGISTER_FORM_EMAIL_FIELD = 'CHANGE_LOGIN_FORM_EMAIL_FIELD';
-export const VALIDATE_REGISTER_FORM_EMAIL_FIELD = 'VALIDATE_LOGIN_FORM_EMAIL_FIELD';
+export const CHANGE_REGISTER_FORM_EMAIL_FIELD = 'CHANGE_REGISTER_FORM_EMAIL_FIELD';
+export const VALIDATE_REGISTER_FORM_EMAIL_FIELD = 'VALIDATE_REGISTER_FORM_EMAIL_FIELD';
 export const CHANGE_REGISTER_FORM_USERNAME_FIELD = 'CHANGE_REGISTER_FORM_USERNAME_FIELD';
 export const VALIDATE_REGISTER_FORM_USERNAME_FIELD = 'VALIDATE_REGISTER_FORM_USERNAME_FIELD';
 export const CHANGE_REGISTER_FORM_PASSWORD_FIELD = 'CHANGE_REGISTER_FORM_PASSWORD_FIELD';
@@ -73,7 +72,7 @@ export const validateRegisterFormFirstNameField = (firstNameField) => {
         errorMessage: ''
     };
     if (firstNameField.validationRequired) {
-        //validationResult = InputFieldValidationService.validateEmail(emailField.value);
+        validationResult = InputFieldValidationService.validateRequired(firstNameField.value)
     }
 
     return {
@@ -107,7 +106,7 @@ export const validateRegisterFormLastNameField = (lastNameField) => {
         errorMessage: ''
     };
     if (lastNameField.validationRequired) {
-        //validationResult = InputFieldValidationService.validateEmail(lastNameField.value);
+        validationResult = InputFieldValidationService.validateRequired(lastNameField.value)
     }
 
     return {
@@ -139,7 +138,7 @@ export const changeRegisterFormDayOfBirthField = (dayOfBirthField, event) => {
     return {
         type: CHANGE_REGISTER_FORM_DAY_OF_BIRTH_FIELD,
         dayOfBirthField: {
-            value: event.format('YYYY-MM-DD'),
+            value: event === null ? null : event.format('YYYY-MM-DD'),
             valid: true, // Always valid during changing, validation is done afterwards.
             validationRequired: true, // after first change by the user, validation is always required
             errorMessage: dayOfBirthField.errorMessage,
@@ -200,7 +199,7 @@ export const validateRegisterFormUsernameField = (usernameField) => {
         errorMessage: ''
     };
     if (usernameField.validationRequired) {
-        //validationResult = InputFieldValidationService.validateEmail(emailField.value);
+        validationResult = InputFieldValidationService.validateInputLength('username', usernameField.value, 6);
     }
 
     return {
@@ -224,17 +223,45 @@ export const changeRegisterFormPasswordField = (passwordField, newValue) => {
             validationRequired: true, // after first change by the user, validation is always required
             errorMessage: passwordField.errorMessage,
             name: PASSWORD_FIELD_NAME
+        },
+        passwordStrength: {
+            atLeastEightCharacters: PasswordStrengthValidationService.hasAtLeastEightCharacters(newValue),
+            atLeastOneNumber: PasswordStrengthValidationService.hasAtLeastOneNumber(newValue),
+            atLeastOneCapitalLetter: PasswordStrengthValidationService.hasAtLeastOneCapitalLetter(newValue),
+            atLeastOneSpecialCharacter: PasswordStrengthValidationService.hasAtLeastOneSpecialCharacter(newValue)
         }
     }
 };
 
-export const validateRegisterFormPasswordField = (passwordField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (passwordField.validationRequired) {
-        //validationResult = InputFieldValidationService.validateEmail(emailField.value);
+export const validateRegisterFormPasswordField = (passwordField, passwordStrength) => {
+    const { atLeastEightCharacters, atLeastOneNumber,
+            atLeastOneCapitalLetter, atLeastOneSpecialCharacter } = passwordStrength;
+    let validationResult;
+    if (!atLeastEightCharacters) {
+        validationResult =  {
+            valid: false,
+            errorMessage: 'At least 8 character.'
+        };
+    } else if (!atLeastOneNumber) {
+        validationResult =  {
+            valid: false,
+            errorMessage: 'At least one number.'
+        };
+    } else if (!atLeastOneCapitalLetter) {
+        validationResult =  {
+            valid: false,
+            errorMessage: 'At least one capital letter.'
+        };
+    } else if (!atLeastOneSpecialCharacter) {
+        validationResult =  {
+            valid: false,
+            errorMessage: 'At least one special character.'
+        };
+    } else {
+        validationResult = {
+            valid: true,
+            errorMessage: ''
+        };
     }
 
     return {
@@ -245,7 +272,8 @@ export const validateRegisterFormPasswordField = (passwordField) => {
             validationRequired: passwordField.validationRequired,
             errorMessage: validationResult.errorMessage,
             name: PASSWORD_FIELD_NAME
-        }
+        },
+        passwordStrength
     }
 };
 

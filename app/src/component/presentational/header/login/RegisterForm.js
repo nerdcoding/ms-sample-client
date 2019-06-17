@@ -25,7 +25,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import {DatePicker, KeyboardDatePicker} from "@material-ui/pickers";
+import {DatePicker} from "@material-ui/pickers";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -33,6 +33,7 @@ import Button from "@material-ui/core/Button";
 import LoadingButton from "../../util/LoadingButton";
 import moment from "moment";
 import * as PropTypes from "prop-types";
+import PasswordStrength from "../../../../action/header/login/PasswordStength";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -136,16 +137,16 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                             </RadioGroup>
                         </Grid>
                         <Grid item xs={6}>
-                            <KeyboardDatePicker
+                            <DatePicker
                                 margin="normal"
                                 label="Day of birth"
                                 name={registerForm.dayOfBirthField.name}
                                 value={registerForm.dayOfBirthField.value}
                                 onChange={e => handleRegisterFormDayOfBirthChange(registerForm.dayOfBirthField, e)}
                                 maxDate={moment().subtract(18, 'years')}
-                                allowKeyboardControl={true}
                                 format='YYYY-MM-DD'
                                 openTo='year'
+                                maxDateMessage='You must be at least 18 years old.'
                             />
                         </Grid>
 
@@ -224,7 +225,7 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                                 }}
                                 onBlur={e => {
                                     e.preventDefault();
-                                    handleRegisterFormPasswordValidation(registerForm.passwordField);
+                                    handleRegisterFormPasswordValidation(registerForm.passwordField, registerForm.passwordStrength);
                                 }}
                                 margin="dense"
                                 fullWidth
@@ -254,9 +255,9 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                         <Grid item xs={12}>
                             <Typography color='primary'>Required password rules:</Typography>
                         </Grid>
-{/*                        <Grid item xs={12}>
-                            <PasswordStrength {...passwordStrength} />
-                        </Grid>*/}
+                        <Grid item xs={12}>
+                            <PasswordStrength {...registerForm.passwordStrength} />
+                        </Grid>
                     </Grid>
                 </DialogContent>
                 <DialogActions>

@@ -122,7 +122,13 @@ const initialState = {
             errorMessage: '',
             name: 'repeatPassword'
         },
-        onRegisterLoading: false
+        onRegisterLoading: false,
+        passwordStrength: {
+            atLeastEightCharacters: false,
+            atLeastOneNumber: false,
+            atLeastOneCapitalLetter: false,
+            atLeastOneSpecialCharacter: false
+        }
     }
 };
 

@@ -31,7 +31,8 @@ import {
     VALIDATE_REGISTER_FORM_EMAIL_FIELD,
     VALIDATE_REGISTER_FORM_FIRST_NAME_FIELD,
     VALIDATE_REGISTER_FORM_LAST_NAME_FIELD,
-    VALIDATE_REGISTER_FORM_PASSWORD_FIELD, VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
+    VALIDATE_REGISTER_FORM_PASSWORD_FIELD,
+    VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
     VALIDATE_REGISTER_FORM_USERNAME_FIELD
 } from "../../../action/header/login/RegisterFormAction";
 
@@ -118,6 +119,12 @@ export const registerFormReducer = (registerForm, action) => {
                     validationRequired: action.passwordField.validationRequired,
                     errorMessage: action.passwordField.errorMessage,
                     name: action.passwordField.name
+                },
+                passwordStrength: {
+                    atLeastEightCharacters: action.passwordStrength.atLeastEightCharacters,
+                    atLeastOneNumber: action.passwordStrength.atLeastOneNumber,
+                    atLeastOneCapitalLetter: action.passwordStrength.atLeastOneCapitalLetter,
+                    atLeastOneSpecialCharacter: action.passwordStrength.atLeastOneSpecialCharacter
                 }
             };
         case CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:

@@ -237,22 +237,22 @@ export const validateRegisterFormPasswordField = (passwordField, passwordStrengt
     const { atLeastEightCharacters, atLeastOneNumber,
             atLeastOneCapitalLetter, atLeastOneSpecialCharacter } = passwordStrength;
     let validationResult;
-    if (!atLeastEightCharacters) {
+    if (passwordField.validationRequired && !atLeastEightCharacters) {
         validationResult =  {
             valid: false,
             errorMessage: 'At least 8 character.'
         };
-    } else if (!atLeastOneNumber) {
+    } else if (passwordField.validationRequired && !atLeastOneNumber) {
         validationResult =  {
             valid: false,
             errorMessage: 'At least one number.'
         };
-    } else if (!atLeastOneCapitalLetter) {
+    } else if (passwordField.validationRequired && !atLeastOneCapitalLetter) {
         validationResult =  {
             valid: false,
             errorMessage: 'At least one capital letter.'
         };
-    } else if (!atLeastOneSpecialCharacter) {
+    } else if (passwordField.validationRequired && !atLeastOneSpecialCharacter) {
         validationResult =  {
             valid: false,
             errorMessage: 'At least one special character.'
@@ -292,7 +292,7 @@ export const changeRegisterFormRepeatPasswordField = (repeatPasswordField, newVa
 
 export const validateRegisterFormRepeatPasswordField = (repeatPasswordField, passwordField) => {
     let validationResult;
-    if (repeatPasswordField.value !== passwordField.value) {
+    if (repeatPasswordField.validationRequired && (repeatPasswordField.value !== passwordField.value)) {
         validationResult =  {
             valid: false,
             errorMessage: 'The passwords do not match.'

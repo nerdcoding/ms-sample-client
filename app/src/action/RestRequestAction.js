@@ -36,7 +36,7 @@ export const requestRestEndpoint = (action) => {
             successMessageText: '',
         },
         error: {
-            showErrorMessage: false,
+            showErrorMessage: true,
             errorMessageText: '',
         },
         subsequentActions: {

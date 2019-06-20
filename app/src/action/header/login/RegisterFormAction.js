@@ -53,6 +53,11 @@ export const REGISTER = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_IS_LOADING = 'REGISTER_IS_LOADING';
 
+export const EMAIL_AVAILABILITY = 'EMAIL_AVAILABILITY';
+export const EMAIL_AVAILABILITY_SUCCESS = 'EMAIL_AVAILABILITY_SUCCESS';
+export const USERNAME_AVAILABILITY = 'USERNAME_AVAILABILITY';
+export const USERNAME_AVAILABILITY_SUCCESS = 'USERNAME_AVAILABILITY_SUCCESS';
+
 export const changeRegisterFormFirstNameField = (firstNameField, newValue) => {
     let validationResult = {
         valid: firstNameField.valid,
@@ -323,4 +328,50 @@ export const handleRegister = (registerForm) => {
             errorActions: []
         }
     });
+};
+
+export const checkEmailAvailability = (email) => {
+        return requestRestEndpoint({
+            type: EMAIL_AVAILABILITY,
+            authenticationType: AuthenticationType.BASIC_AUTH,
+            method: HttpMethod.GET,
+            endpoint: process.env.AUTH_SERVER_URL + '/user/email/' + email,
+            headers: {
+                'Authorization': 'Basic ' + btoa(process.env.AUTH_SERVER_USER+':'+process.env.AUTH_SERVER_PASSWORD),
+                'Content-Type': 'application/json'
+            },
+            error: {
+                showErrorMessage: false,
+            },
+            subsequentActions: {
+                successActions: [],
+                errorActions: [{
+                    type: EMAIL_AVAILABILITY_SUCCESS,
+                    response: false
+                }]
+            }
+        });
+};
+
+export const checkUsernameAvailability = (username) => {
+        return requestRestEndpoint({
+            type: USERNAME_AVAILABILITY,
+            authenticationType: AuthenticationType.BASIC_AUTH,
+            method: HttpMethod.GET,
+            endpoint: process.env.AUTH_SERVER_URL + '/user/' + username,
+            headers: {
+                'Authorization': 'Basic ' + btoa(process.env.AUTH_SERVER_USER + ':' + process.env.AUTH_SERVER_PASSWORD),
+                'Content-Type': 'application/json'
+            },
+            error: {
+                showErrorMessage: false,
+            },
+            subsequentActions: {
+                successActions: [],
+                errorActions: [{
+                    type: USERNAME_AVAILABILITY_SUCCESS,
+                    response: false
+                }]
+            }
+        });
 };

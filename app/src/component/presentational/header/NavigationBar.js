@@ -92,6 +92,7 @@ const NavigationBar = ({header, authentication,
         handleRegisterFormUsernameChange, handleRegisterFormUsernameValidation,
         handleRegisterFormPasswordChange, handleRegisterFormPasswordValidation,
         handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation,
+        checkEmailAvailability, checkUsernameAvailability
         }) => {
     const classes = useStyles();
     return(
@@ -181,8 +182,9 @@ const NavigationBar = ({header, authentication,
                                          handleRegisterFormPasswordValidation={handleRegisterFormPasswordValidation}
                                          handleRegisterFormRepeatPasswordChange={handleRegisterFormRepeatPasswordChange}
                                          handleRegisterFormRepeatPasswordValidation={handleRegisterFormRepeatPasswordValidation}
+                                         checkEmailAvailability={checkEmailAvailability}
+                                         checkUsernameAvailability={checkUsernameAvailability}
                     />
-
                 </Toolbar>
             </AppBar>
 
@@ -229,6 +231,8 @@ NavigationBar.propTypes = {
     handleRegisterFormPasswordValidation: PropTypes.func.isRequired,
     handleRegisterFormRepeatPasswordChange: PropTypes.func.isRequired,
     handleRegisterFormRepeatPasswordValidation: PropTypes.func.isRequired,
+    checkEmailAvailability: PropTypes.func.isRequired,
+    checkUsernameAvailability: PropTypes.func.isRequired,
 };
 
 export default NavigationBar;

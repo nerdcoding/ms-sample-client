@@ -22,7 +22,7 @@ import {connect} from "react-redux";
 
 import NavigationBar from "../presentational/header/NavigationBar";
 import {toggleMobileMenu, toggleProfileMenu} from "../../action/header/HeaderAction";
-import {toggleLoginRegisterDialog, switchLoginRegisterDialogTab} from "../../action/header/login/LoginRegisterAction";
+import {switchLoginRegisterDialogTab, toggleLoginRegisterDialog} from "../../action/header/login/LoginRegisterAction";
 import {
     changeLoginFormEmailField,
     changeLoginFormPasswordField,
@@ -39,11 +39,15 @@ import {
     changeRegisterFormLastNameField,
     changeRegisterFormPasswordField,
     changeRegisterFormRepeatPasswordField,
-    changeRegisterFormUsernameField, handleRegister,
+    changeRegisterFormUsernameField,
+    checkEmailAvailability,
+    checkUsernameAvailability,
+    handleRegister,
     validateRegisterFormEmailField,
     validateRegisterFormFirstNameField,
     validateRegisterFormLastNameField,
-    validateRegisterFormPasswordField, validateRegisterFormRepeatPasswordField,
+    validateRegisterFormPasswordField,
+    validateRegisterFormRepeatPasswordField,
     validateRegisterFormUsernameField
 } from "../../action/header/login/RegisterFormAction";
 
@@ -81,6 +85,9 @@ const mapDispatchToProps = dispatch => ({
     handleRegisterFormPasswordValidation: (passwordField, repeatPasswordField) => dispatch(validateRegisterFormPasswordField(passwordField, repeatPasswordField)),
     handleRegisterFormRepeatPasswordChange: (repeatPasswordField, passwordField, newValue) => dispatch(changeRegisterFormRepeatPasswordField(repeatPasswordField, passwordField, newValue)),
     handleRegisterFormRepeatPasswordValidation: (repeatPasswordField, passwordField) => dispatch(validateRegisterFormRepeatPasswordField(repeatPasswordField, passwordField)),
+    checkEmailAvailability: (email) => dispatch(checkEmailAvailability(email)),
+    checkUsernameAvailability: (username) => dispatch(checkUsernameAvailability(username))
+
 });
 
 

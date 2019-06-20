@@ -30,6 +30,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import OkIcon from "@material-ui/icons/CheckCircleOutline";
+import NotOkIcon from "@material-ui/icons/ErrorOutline";
 import LoadingButton from "../../util/LoadingButton";
 import moment from "moment";
 import * as PropTypes from "prop-types";
@@ -62,7 +64,8 @@ const RegisterForm = ({registerForm, onClose, onRegister,
         handleRegisterFormEmailChange, handleRegisterFormEmailValidation,
         handleRegisterFormUsernameChange, handleRegisterFormUsernameValidation,
         handleRegisterFormPasswordChange, handleRegisterFormPasswordValidation,
-        handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation
+        handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation,
+        checkEmailAvailability, checkUsernameAvailability
         }) => {
     const classes = useStyles();
 
@@ -174,19 +177,21 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                                 onBlur={e => {
                                     e.preventDefault();
                                     handleRegisterFormEmailValidation(registerForm.emailField);
+                                    registerForm.emailField.value && registerForm.emailField.value.length > 0
+                                        ? checkEmailAvailability(registerForm.emailField.value) : '';
                                 }}
                                 margin="dense"
                                 fullWidth
                             />
                         </Grid>
-{/*                        <Grid align='center' item xs={6}>
-                            { availability.email !== undefined
-                                ? (availability.email
+                        <Grid align='center' item xs={6}>
+                            { registerForm.emailAvailability !== null
+                                ? (registerForm.emailAvailability
                                     ? <Typography className={classes.green}>Email is available <OkIcon /></Typography>
                                     : <Typography className={classes.red}>Email is not available <NotOkIcon /></Typography>)
                                 : <div> </div>
                             }
-                        </Grid>*/}
+                        </Grid>
 
                         <Grid item xs={6}>
                             <TextField
@@ -204,19 +209,21 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                                 onBlur={e => {
                                     e.preventDefault();
                                     handleRegisterFormUsernameValidation(registerForm.usernameField);
+                                    registerForm.usernameField.value && registerForm.usernameField.value.length > 0
+                                        ? checkUsernameAvailability(registerForm.usernameField.value) : '';
                                 }}
                                 margin="dense"
                                 fullWidth
                             />
                         </Grid>
-{/*                        <Grid align='center' item xs={6}>
-                            { availability.username !== undefined
-                                ? (availability.username
+                        <Grid align='center' item xs={6}>
+                            { registerForm.usernameAvailability !== null
+                                ? (registerForm.usernameAvailability
                                     ? <Typography className={classes.green}>Username is available <OkIcon /></Typography>
                                     : <Typography className={classes.red}>Username is not available <NotOkIcon /></Typography>)
                                 : <div> </div>
                             }
-                        </Grid>*/}
+                        </Grid>
 
                         <Grid item xs={6}>
                             <TextField
@@ -306,6 +313,8 @@ RegisterForm.propTypes = {
     handleRegisterFormPasswordValidation: PropTypes.func.isRequired,
     handleRegisterFormRepeatPasswordChange: PropTypes.func.isRequired,
     handleRegisterFormRepeatPasswordValidation: PropTypes.func.isRequired,
+    checkEmailAvailability: PropTypes.func.isRequired,
+    checkUsernameAvailability: PropTypes.func.isRequired,
 };
 
 

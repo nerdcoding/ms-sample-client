@@ -48,7 +48,8 @@ function LoginRegisterDialog({isOpen, selectedTab,
         handleRegisterFormEmailChange, handleRegisterFormEmailValidation,
         handleRegisterFormUsernameChange, handleRegisterFormUsernameValidation,
         handleRegisterFormPasswordChange, handleRegisterFormPasswordValidation,
-        handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation
+        handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation,
+        checkEmailAvailability, checkUsernameAvailability
         }) {
     const classes = useStyles();
     return (
@@ -104,6 +105,8 @@ function LoginRegisterDialog({isOpen, selectedTab,
                         handleRegisterFormPasswordValidation={handleRegisterFormPasswordValidation}
                         handleRegisterFormRepeatPasswordChange={handleRegisterFormRepeatPasswordChange}
                         handleRegisterFormRepeatPasswordValidation={handleRegisterFormRepeatPasswordValidation}
+                        checkEmailAvailability={checkEmailAvailability}
+                        checkUsernameAvailability={checkUsernameAvailability}
                       />
                 }
             </Dialog>
@@ -140,6 +143,8 @@ LoginRegisterDialog.propTypes = {
     handleRegisterFormPasswordValidation: PropTypes.func.isRequired,
     handleRegisterFormRepeatPasswordChange: PropTypes.func.isRequired,
     handleRegisterFormRepeatPasswordValidation: PropTypes.func.isRequired,
+    checkEmailAvailability: PropTypes.func.isRequired,
+    checkUsernameAvailability: PropTypes.func.isRequired
 };
 
 export default LoginRegisterDialog;

@@ -35,7 +35,7 @@ import {
     CHANGE_REGISTER_FORM_LAST_NAME_FIELD,
     CHANGE_REGISTER_FORM_PASSWORD_FIELD,
     CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
-    CHANGE_REGISTER_FORM_USERNAME_FIELD, REGISTER_IS_LOADING,
+    CHANGE_REGISTER_FORM_USERNAME_FIELD, EMAIL_AVAILABILITY_SUCCESS, REGISTER_IS_LOADING, USERNAME_AVAILABILITY_SUCCESS,
     VALIDATE_REGISTER_FORM_EMAIL_FIELD,
     VALIDATE_REGISTER_FORM_FIRST_NAME_FIELD,
     VALIDATE_REGISTER_FORM_LAST_NAME_FIELD,
@@ -128,7 +128,9 @@ const initialState = {
             atLeastOneNumber: false,
             atLeastOneCapitalLetter: false,
             atLeastOneSpecialCharacter: false
-        }
+        },
+        emailAvailability: null,
+        usernameAvailability: null
     }
 };
 
@@ -166,6 +168,8 @@ export const loginRegisterDialogReducer = (state=initialState, action) => {
         case VALIDATE_REGISTER_FORM_PASSWORD_FIELD:
         case CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:
         case VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:
+        case EMAIL_AVAILABILITY_SUCCESS:
+        case USERNAME_AVAILABILITY_SUCCESS:
             return {
                 ...state,
                 registerForm: registerFormReducer(state.registerForm, action)

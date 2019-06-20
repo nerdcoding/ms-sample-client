@@ -26,8 +26,8 @@ import {
     CHANGE_REGISTER_FORM_LAST_NAME_FIELD,
     CHANGE_REGISTER_FORM_PASSWORD_FIELD,
     CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
-    CHANGE_REGISTER_FORM_USERNAME_FIELD,
-    REGISTER_IS_LOADING,
+    CHANGE_REGISTER_FORM_USERNAME_FIELD, EMAIL_AVAILABILITY_SUCCESS,
+    REGISTER_IS_LOADING, USERNAME_AVAILABILITY_SUCCESS,
     VALIDATE_REGISTER_FORM_EMAIL_FIELD,
     VALIDATE_REGISTER_FORM_FIRST_NAME_FIELD,
     VALIDATE_REGISTER_FORM_LAST_NAME_FIELD,
@@ -131,6 +131,16 @@ export const registerFormReducer = (registerForm, action) => {
                     errorMessage: action.repeatPasswordField.errorMessage,
                     name: action.repeatPasswordField.name
                 }
+            };
+        case EMAIL_AVAILABILITY_SUCCESS:
+            return {
+                ...registerForm,
+                emailAvailability: !action.response
+            };
+        case USERNAME_AVAILABILITY_SUCCESS:
+            return {
+                ...registerForm,
+                usernameAvailability: !action.response
             };
         default:
             return registerForm;

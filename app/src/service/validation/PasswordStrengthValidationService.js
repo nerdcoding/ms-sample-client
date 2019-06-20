@@ -19,25 +19,57 @@
 'use strict';
 
 
+import {MINIMUM_PASSWORD_LENGTH} from "../Constants";
+
 const PasswordStrengthValidationService = {
 
-    hasAtLeastEightCharacters: function(value) {
-        return value && value.length >= 8;
-    },
+    validate: function(value) {
+        const atLeastEightCharacters = hasAtLeastEightCharacters(value);
+        const atLeastOneNumber = hasAtLeastOneNumber(value);
+        const atLeastOneCapitalLetter = hasAtLeastOneCapitalLetter(value);
+        const atLeastOneSpecialCharacter = hasAtLeastOneSpecialCharacter(value);
 
-    hasAtLeastOneNumber: function(value) {
-        return value && /\d/.test(value);
-    },
+        let errorMessage;
+        if (!atLeastEightCharacters) {
+            errorMessage = 'At least ' + MINIMUM_PASSWORD_LENGTH + ' character.';
+        } else if (!atLeastOneNumber) {
+            errorMessage = 'At least one number.';
+        } else if (!atLeastOneCapitalLetter) {
+            errorMessage = 'At least one capital letter.';
+        } else if (!atLeastOneSpecialCharacter) {
+            errorMessage = 'At least one special character.';
+        } else {
+            errorMessage = '';
+        }
 
-    hasAtLeastOneCapitalLetter: function(value) {
-        return value && /[A-Z]/.test(value);
-    },
-
-    hasAtLeastOneSpecialCharacter: function(value) {
-        return value && /[!@#$%^&*()\-_=+\|\\\[\]{};:'"/?.,<>~`]/.test(value);
+      return {
+          valid: atLeastEightCharacters && atLeastOneNumber && atLeastOneCapitalLetter && atLeastOneSpecialCharacter,
+          errorMessage,
+          passwordStrength: {
+              atLeastEightCharacters,
+              atLeastOneNumber,
+              atLeastOneCapitalLetter,
+              atLeastOneSpecialCharacter
+          }
+      }
     }
 
 };
 
 export default PasswordStrengthValidationService;
 
+const hasAtLeastEightCharacters = (value) => {
+    return value && value.length >= MINIMUM_PASSWORD_LENGTH;
+};
+
+const hasAtLeastOneNumber = (value) => {
+    return value && /\d/.test(value);
+};
+
+const hasAtLeastOneCapitalLetter = (value) => {
+    return value && /[A-Z]/.test(value);
+};
+
+const hasAtLeastOneSpecialCharacter = (value) => {
+    return value && /[!@#$%^&*()\-_=+\|\\\[\]{};:'"/?.,<>~`]/.test(value);
+};

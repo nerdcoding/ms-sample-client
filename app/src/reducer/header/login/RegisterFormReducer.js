@@ -45,7 +45,6 @@ export const registerFormReducer = (registerForm, action) => {
                 firstNameField: {
                     value: action.firstNameField.value,
                     valid: action.firstNameField.valid,
-                    validationRequired: action.firstNameField.validationRequired,
                     errorMessage: action.firstNameField.errorMessage,
                     name: action.firstNameField.name
                 }
@@ -57,7 +56,6 @@ export const registerFormReducer = (registerForm, action) => {
                 lastNameField: {
                     value: action.lastNameField.value,
                     valid: action.lastNameField.valid,
-                    validationRequired: action.lastNameField.validationRequired,
                     errorMessage: action.lastNameField.errorMessage,
                     name: action.lastNameField.name
                 }
@@ -68,7 +66,6 @@ export const registerFormReducer = (registerForm, action) => {
                 genderField: {
                     value: action.genderField.value,
                     valid: action.genderField.valid,
-                    validationRequired: action.genderField.validationRequired,
                     errorMessage: action.genderField.errorMessage,
                     name: action.genderField.name
                 }
@@ -79,7 +76,6 @@ export const registerFormReducer = (registerForm, action) => {
                 dayOfBirthField: {
                     value: action.dayOfBirthField.value,
                     valid: action.dayOfBirthField.valid,
-                    validationRequired: action.dayOfBirthField.validationRequired,
                     errorMessage: action.dayOfBirthField.errorMessage,
                     name: action.dayOfBirthField.name
                 }
@@ -91,7 +87,6 @@ export const registerFormReducer = (registerForm, action) => {
                 emailField: {
                     value: action.emailField.value,
                     valid: action.emailField.valid,
-                    validationRequired: action.emailField.validationRequired,
                     errorMessage: action.emailField.errorMessage,
                     name: action.emailField.name
                 }
@@ -104,7 +99,6 @@ export const registerFormReducer = (registerForm, action) => {
                 usernameField: {
                     value: action.usernameField.value,
                     valid: action.usernameField.valid,
-                    validationRequired: action.usernameField.validationRequired,
                     errorMessage: action.usernameField.errorMessage,
                     name: action.usernameField.name
                 }
@@ -116,7 +110,6 @@ export const registerFormReducer = (registerForm, action) => {
                 passwordField: {
                     value: action.passwordField.value,
                     valid: action.passwordField.valid,
-                    validationRequired: action.passwordField.validationRequired,
                     errorMessage: action.passwordField.errorMessage,
                     name: action.passwordField.name
                 },
@@ -125,7 +118,8 @@ export const registerFormReducer = (registerForm, action) => {
                     atLeastOneNumber: action.passwordStrength.atLeastOneNumber,
                     atLeastOneCapitalLetter: action.passwordStrength.atLeastOneCapitalLetter,
                     atLeastOneSpecialCharacter: action.passwordStrength.atLeastOneSpecialCharacter
-                }
+                },
+                repeatPasswordField: action.repeatPasswordField
             };
         case CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:
         case VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD:
@@ -134,7 +128,6 @@ export const registerFormReducer = (registerForm, action) => {
                 repeatPasswordField: {
                     value: action.repeatPasswordField.value,
                     valid: action.repeatPasswordField.valid,
-                    validationRequired: action.repeatPasswordField.validationRequired,
                     errorMessage: action.repeatPasswordField.errorMessage,
                     name: action.repeatPasswordField.name
                 }

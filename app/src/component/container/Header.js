@@ -77,9 +77,9 @@ const mapDispatchToProps = dispatch => ({
     handleRegisterFormEmailValidation: (emailField) => dispatch(validateRegisterFormEmailField(emailField)),
     handleRegisterFormUsernameChange: (usernameField, newValue) => dispatch(changeRegisterFormUsernameField(usernameField, newValue)),
     handleRegisterFormUsernameValidation: (usernameField) => dispatch(validateRegisterFormUsernameField(usernameField)),
-    handleRegisterFormPasswordChange: (passwordField, newValue) => dispatch(changeRegisterFormPasswordField(passwordField, newValue)),
-    handleRegisterFormPasswordValidation: (passwordField, passwordStrength) => dispatch(validateRegisterFormPasswordField(passwordField, passwordStrength)),
-    handleRegisterFormRepeatPasswordChange: (repeatPasswordField, newValue) => dispatch(changeRegisterFormRepeatPasswordField(repeatPasswordField, newValue)),
+    handleRegisterFormPasswordChange: (passwordField, newValue, repeatPasswordField) => dispatch(changeRegisterFormPasswordField(passwordField, newValue, repeatPasswordField)),
+    handleRegisterFormPasswordValidation: (passwordField, repeatPasswordField) => dispatch(validateRegisterFormPasswordField(passwordField, repeatPasswordField)),
+    handleRegisterFormRepeatPasswordChange: (repeatPasswordField, passwordField, newValue) => dispatch(changeRegisterFormRepeatPasswordField(repeatPasswordField, passwordField, newValue)),
     handleRegisterFormRepeatPasswordValidation: (repeatPasswordField, passwordField) => dispatch(validateRegisterFormRepeatPasswordField(repeatPasswordField, passwordField)),
 });
 

@@ -38,33 +38,34 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_IS_LOADING = 'LOGIN_IS_LOADING';
 
 export const changeLoginFormEmailField = (emailField, newValue) => {
+    let validationResult = {
+        valid: emailField.valid,
+        errorMessage: emailField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.validateEmail(newValue);
+    }
+
     return {
         type: CHANGE_LOGIN_FORM_EMAIL_FIELD,
         emailField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: emailField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: EMAIL_FIELD_NAME
         }
     }
 };
 
 export const validateLoginFormEmailField = (emailField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (emailField.validationRequired) {
-        validationResult = InputFieldValidationService.validateEmail(emailField.value);
-    }
+    const validationResult = InputFieldValidationService.validateEmail(emailField.value);
 
     return {
         type: VALIDATE_LOGIN_FORM_EMAIL_FIELD,
         emailField: {
             value: emailField.value,
             valid: validationResult.valid,
-            validationRequired: emailField.validationRequired,
             errorMessage: validationResult.errorMessage,
             name: EMAIL_FIELD_NAME
         }
@@ -72,35 +73,36 @@ export const validateLoginFormEmailField = (emailField) => {
 };
 
 export const changeLoginFormPasswordField = (passwordField, newValue) => {
+    let validationResult = {
+        valid: passwordField.valid,
+        errorMessage: passwordField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.validateInputLength(
+            'password', newValue, MINIMUM_PASSWORD_LENGTH);
+    }
+
     return {
         type: CHANGE_LOGIN_FORM_PASSWORD_FIELD,
         passwordField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: passwordField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: PASSWORD_FIELD_NAME
         }
     }
 };
 
 export const validateLoginFormPasswordField = (passwordField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (passwordField.validationRequired) {
-        validationResult = InputFieldValidationService.validateInputLength(
-            'password', passwordField.value, MINIMUM_PASSWORD_LENGTH
-        );
-    }
+    const validationResult = InputFieldValidationService.validateInputLength(
+            'password', passwordField.value, MINIMUM_PASSWORD_LENGTH);
 
     return {
         type: VALIDATE_LOGIN_FORM_PASSWORD_FIELD,
         passwordField: {
             value: passwordField.value,
             valid: validationResult.valid,
-            validationRequired: passwordField.validationRequired,
             errorMessage: validationResult.errorMessage,
             name: PASSWORD_FIELD_NAME
         }

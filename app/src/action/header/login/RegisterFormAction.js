@@ -27,7 +27,7 @@ import PasswordStrengthValidationService from "../../../service/validation/Passw
 
 
 const FIRST_NAME_FIELD_NAME = 'firstName';
-const LAST_NAME_FIELD_NAME = 'lasteName';
+const LAST_NAME_FIELD_NAME = 'lastName';
 const GENDER_FIELD_NAME = 'gender';
 const DAY_OF_BIRTH_FIELD_NAME = 'dayOfBirth';
 const EMAIL_FIELD_NAME = 'email';
@@ -54,26 +54,28 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_IS_LOADING = 'REGISTER_IS_LOADING';
 
 export const changeRegisterFormFirstNameField = (firstNameField, newValue) => {
+    let validationResult = {
+        valid: firstNameField.valid,
+        errorMessage: firstNameField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.validateRequired(newValue);
+    }
+
     return {
         type: CHANGE_REGISTER_FORM_FIRST_NAME_FIELD,
         firstNameField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: firstNameField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: FIRST_NAME_FIELD_NAME
         }
     }
 };
 
 export const validateRegisterFormFirstNameField = (firstNameField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (firstNameField.validationRequired) {
-        validationResult = InputFieldValidationService.validateRequired(firstNameField.value)
-    }
+    const validationResult = InputFieldValidationService.validateRequired(firstNameField.value);
 
     return {
         type: VALIDATE_REGISTER_FORM_FIRST_NAME_FIELD,
@@ -88,26 +90,28 @@ export const validateRegisterFormFirstNameField = (firstNameField) => {
 };
 
 export const changeRegisterFormLastNameField = (lastNameField, newValue) => {
+    let validationResult = {
+        valid: lastNameField.valid,
+        errorMessage: lastNameField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.validateRequired(newValue);
+    }
+
     return {
         type: CHANGE_REGISTER_FORM_LAST_NAME_FIELD,
         lastNameField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: lastNameField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: LAST_NAME_FIELD_NAME
         }
     }
 };
 
 export const validateRegisterFormLastNameField = (lastNameField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (lastNameField.validationRequired) {
-        validationResult = InputFieldValidationService.validateRequired(lastNameField.value)
-    }
+    const validationResult = InputFieldValidationService.validateRequired(lastNameField.value);
 
     return {
         type: VALIDATE_REGISTER_FORM_LAST_NAME_FIELD,
@@ -126,9 +130,8 @@ export const changeRegisterFormGenderField = (genderField, newValue) => {
         type: CHANGE_REGISTER_FORM_GENDER_FIELD,
         genderField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: genderField.errorMessage,
+            valid: true, // no validation - always valid
+            errorMessage: '',
             name: GENDER_FIELD_NAME
         }
     }
@@ -139,35 +142,36 @@ export const changeRegisterFormDayOfBirthField = (dayOfBirthField, event) => {
         type: CHANGE_REGISTER_FORM_DAY_OF_BIRTH_FIELD,
         dayOfBirthField: {
             value: event === null ? null : event.format('YYYY-MM-DD'),
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: dayOfBirthField.errorMessage,
+            valid: true, // no validation - always valid
+            errorMessage: '',
             name: DAY_OF_BIRTH_FIELD_NAME
         }
     }
 };
 
 export const changeRegisterFormEmailField = (emailField, newValue) => {
+    let validationResult = {
+        valid: emailField.valid,
+        errorMessage: emailField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.validateEmail(newValue);
+    }
+
     return {
         type: CHANGE_REGISTER_FORM_EMAIL_FIELD,
         emailField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: emailField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: EMAIL_FIELD_NAME
         }
     }
 };
 
 export const validateRegisterFormEmailField = (emailField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (emailField.validationRequired) {
-        validationResult = InputFieldValidationService.validateEmail(emailField.value);
-    }
+    const validationResult = InputFieldValidationService.validateEmail(emailField.value);
 
     return {
         type: VALIDATE_REGISTER_FORM_EMAIL_FIELD,
@@ -182,86 +186,64 @@ export const validateRegisterFormEmailField = (emailField) => {
 };
 
 export const changeRegisterFormUsernameField = (usernameField, newValue) => {
+    let validationResult = {
+        valid: usernameField.valid,
+        errorMessage: usernameField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.validateInputLength('username', newValue, 6);
+    }
+
     return {
         type: CHANGE_REGISTER_FORM_USERNAME_FIELD,
         usernameField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: usernameField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: USERNAME_FIELD_NAME
         }
     }
 };
 export const validateRegisterFormUsernameField = (usernameField) => {
-    let validationResult = {
-        valid: true,
-        errorMessage: ''
-    };
-    if (usernameField.validationRequired) {
-        validationResult = InputFieldValidationService.validateInputLength('username', usernameField.value, 6);
-    }
+    const validationResult = InputFieldValidationService.validateInputLength('username', usernameField.value, 6);
 
     return {
         type: VALIDATE_REGISTER_FORM_USERNAME_FIELD,
         usernameField: {
             value: usernameField.value,
             valid: validationResult.valid,
-            validationRequired: usernameField.validationRequired,
             errorMessage: validationResult.errorMessage,
             name: USERNAME_FIELD_NAME
         }
     }
 };
 
-export const changeRegisterFormPasswordField = (passwordField, newValue) => {
+export const changeRegisterFormPasswordField = (passwordField, newValue, repeatPasswordField) => {
+    const validationResult = PasswordStrengthValidationService.validate(newValue);
+    if (repeatPasswordField.value && repeatPasswordField.value.length > 0) {
+        // if 'repeatPasswordField' already contains a value: set field to invalid
+        repeatPasswordField.valid = false;
+    }
+
     return {
         type: CHANGE_REGISTER_FORM_PASSWORD_FIELD,
         passwordField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: passwordField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: PASSWORD_FIELD_NAME
         },
-        passwordStrength: {
-            atLeastEightCharacters: PasswordStrengthValidationService.hasAtLeastEightCharacters(newValue),
-            atLeastOneNumber: PasswordStrengthValidationService.hasAtLeastOneNumber(newValue),
-            atLeastOneCapitalLetter: PasswordStrengthValidationService.hasAtLeastOneCapitalLetter(newValue),
-            atLeastOneSpecialCharacter: PasswordStrengthValidationService.hasAtLeastOneSpecialCharacter(newValue)
-        }
+        passwordStrength: validationResult.passwordStrength,
+        repeatPasswordField
     }
 };
 
-export const validateRegisterFormPasswordField = (passwordField, passwordStrength) => {
-    const { atLeastEightCharacters, atLeastOneNumber,
-            atLeastOneCapitalLetter, atLeastOneSpecialCharacter } = passwordStrength;
-    let validationResult;
-    if (passwordField.validationRequired && !atLeastEightCharacters) {
-        validationResult =  {
-            valid: false,
-            errorMessage: 'At least 8 character.'
-        };
-    } else if (passwordField.validationRequired && !atLeastOneNumber) {
-        validationResult =  {
-            valid: false,
-            errorMessage: 'At least one number.'
-        };
-    } else if (passwordField.validationRequired && !atLeastOneCapitalLetter) {
-        validationResult =  {
-            valid: false,
-            errorMessage: 'At least one capital letter.'
-        };
-    } else if (passwordField.validationRequired && !atLeastOneSpecialCharacter) {
-        validationResult =  {
-            valid: false,
-            errorMessage: 'At least one special character.'
-        };
-    } else {
-        validationResult = {
-            valid: true,
-            errorMessage: ''
-        };
+export const validateRegisterFormPasswordField = (passwordField, repeatPasswordField) => {
+    const validationResult = PasswordStrengthValidationService.validate(passwordField.value);
+    if (repeatPasswordField.value && repeatPasswordField.value.length > 0) {
+        // if 'repeatPasswordField' already contains a value: set field to invalid
+        repeatPasswordField.valid = false;
     }
 
     return {
@@ -269,40 +251,37 @@ export const validateRegisterFormPasswordField = (passwordField, passwordStrengt
         passwordField: {
             value: passwordField.value,
             valid: validationResult.valid,
-            validationRequired: passwordField.validationRequired,
             errorMessage: validationResult.errorMessage,
             name: PASSWORD_FIELD_NAME
         },
-        passwordStrength
+        passwordStrength: validationResult.passwordStrength,
+        repeatPasswordField
     }
 };
 
-export const changeRegisterFormRepeatPasswordField = (repeatPasswordField, newValue) => {
+export const changeRegisterFormRepeatPasswordField = (repeatPasswordField, passwordField, newValue) => {
+    let validationResult = {
+        valid: repeatPasswordField.valid,
+        errorMessage: repeatPasswordField.errorMessage
+    };
+    if (!validationResult.valid) {
+        // during onChange do validation only when already invalid.
+        validationResult = InputFieldValidationService.matchPasswords(newValue, passwordField.value);
+    }
+
     return {
         type: CHANGE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,
         repeatPasswordField: {
             value: newValue,
-            valid: true, // Always valid during changing, validation is done afterwards.
-            validationRequired: true, // after first change by the user, validation is always required
-            errorMessage: repeatPasswordField.errorMessage,
+            valid: validationResult.valid,
+            errorMessage: validationResult.errorMessage,
             name: REPEAT_PASSWORD_FIELD_NAME
         }
     }
 };
 
 export const validateRegisterFormRepeatPasswordField = (repeatPasswordField, passwordField) => {
-    let validationResult;
-    if (repeatPasswordField.validationRequired && (repeatPasswordField.value !== passwordField.value)) {
-        validationResult =  {
-            valid: false,
-            errorMessage: 'The passwords do not match.'
-        };
-    } else {
-        validationResult = {
-            valid: true,
-            errorMessage: ''
-        };
-    }
+    const validationResult = InputFieldValidationService.matchPasswords(repeatPasswordField.value, passwordField.value);
 
     return {
         type: VALIDATE_REGISTER_FORM_REPEAT_PASSWORD_FIELD,

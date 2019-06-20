@@ -72,6 +72,20 @@ const InputFieldValidationService = {
             valid: true,
             errorMessage: ''
         };
+    },
+
+    matchPasswords: function(firstPassword, secondPassword) {
+        if (firstPassword === secondPassword) {
+            return {
+                valid: true,
+                errorMessage: ''
+            };
+        } else {
+            return {
+                valid: false,
+                errorMessage: 'The passwords do not match.'
+            };
+        }
     }
 };
 

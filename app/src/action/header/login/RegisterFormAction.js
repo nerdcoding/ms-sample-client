@@ -307,7 +307,7 @@ export const handleRegister = (registerForm) => {
             email: registerForm.emailField.value,
             username: registerForm.usernameField.value,
             gender: registerForm.genderField.value,
-            dayOfBirth: registerForm.dayOfBirth.value,
+            dayOfBirth: registerForm.dayOfBirthField.value,
             password: registerForm.passwordField.value
         }),
         headers: {
@@ -315,7 +315,7 @@ export const handleRegister = (registerForm) => {
             'Content-Type': 'application/json'
         },
         success: {
-            showSuccessMessage: false,
+            showSuccessMessage: true,
             successMessageText: 'Registration was successfully completed',
         },
         subsequentActions: {

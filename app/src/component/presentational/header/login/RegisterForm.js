@@ -68,7 +68,14 @@ const RegisterForm = ({registerForm, onClose, onRegister,
 
     return (
         <React.Fragment>
-            <form className={classes.root} onSubmit={onRegister} noValidate>
+            <form
+                className={classes.root}
+                onSubmit={e => {
+                    e.preventDefault();
+                    onRegister(registerForm);
+                }}
+                noValidate
+            >
                 <DialogContent>
                     <Grid container spacing={4}>
                         <Grid item xs={12}>

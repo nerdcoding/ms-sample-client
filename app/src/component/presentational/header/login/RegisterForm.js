@@ -65,6 +65,7 @@ const RegisterForm = ({registerForm, onClose, onRegister,
         handleRegisterFormRepeatPasswordChange, handleRegisterFormRepeatPasswordValidation
         }) => {
     const classes = useStyles();
+
     return (
         <React.Fragment>
             <form className={classes.root} onSubmit={onRegister} noValidate>
@@ -221,11 +222,15 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                                 helperText={registerForm.passwordField.valid ? '' : registerForm.passwordField.errorMessage}
                                 onChange={e => {
                                     e.preventDefault();
-                                    handleRegisterFormPasswordChange(registerForm.passwordField, e.target.value);
+                                    handleRegisterFormPasswordChange(
+                                        registerForm.passwordField,
+                                        e.target.value,
+                                        registerForm.repeatPasswordField
+                                    );
                                 }}
                                 onBlur={e => {
                                     e.preventDefault();
-                                    handleRegisterFormPasswordValidation(registerForm.passwordField, registerForm.passwordStrength);
+                                    handleRegisterFormPasswordValidation(registerForm.passwordField, registerForm.repeatPasswordField);
                                 }}
                                 margin="dense"
                                 fullWidth
@@ -242,7 +247,7 @@ const RegisterForm = ({registerForm, onClose, onRegister,
                                 helperText={registerForm.repeatPasswordField.valid ? '' : registerForm.repeatPasswordField.errorMessage}
                                 onChange={e => {
                                     e.preventDefault();
-                                    handleRegisterFormRepeatPasswordChange(registerForm.repeatPasswordField, e.target.value);
+                                    handleRegisterFormRepeatPasswordChange(registerForm.repeatPasswordField, registerForm.passwordField, e.target.value);
                                 }}
                                 onBlur={e => {
                                     e.preventDefault();
@@ -300,10 +305,11 @@ RegisterForm.propTypes = {
 export default RegisterForm;
 
 const areAllFieldsValid = (registerForm) => {
-    return true;
-    /*return !loginForm.onLoginLoading
-        && InputFieldValidationService.validateEmail(
-            loginForm.emailField.value).valid
-        && InputFieldValidationService.validateInputLength(
-            'password', loginForm.passwordField.value, MINIMUM_PASSWORD_LENGTH).valid*/
+    return !registerForm.onLoginLoading
+        && registerForm.firstNameField.valid
+        && registerForm.lastNameField.valid
+        && registerForm.emailField.valid
+        && registerForm.usernameField.valid
+        && registerForm.passwordField.valid
+        && registerForm.repeatPasswordField.valid;
 };

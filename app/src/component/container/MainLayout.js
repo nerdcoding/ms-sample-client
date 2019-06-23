@@ -29,7 +29,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    logout: (authentication) => dispatch(logout(authentication))
+    logout: (accessToken, refreshToken) => dispatch(logout(accessToken, refreshToken))
 });
 
 export default connect(

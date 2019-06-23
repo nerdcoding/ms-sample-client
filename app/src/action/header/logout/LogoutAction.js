@@ -25,14 +25,17 @@ import {HttpMethod} from "../../../middleware/HttpMethod";
 export const LOGOUT = 'LOGOUT';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
-export const logout = (authentication) => {
+export const logout = (accessToken, refreshToken) => {
     return requestRestEndpoint({
         type: LOGOUT,
-        authenticationType: AuthenticationType.BEARER,
+        authenticationType: AuthenticationType.BASIC_AUTH,
         method: HttpMethod.DELETE,
         endpoint: process.env.AUTH_SERVER_URL + '/token' +
-            '?access_token=' + authentication.access_token +
-            '&refresh_token=' + authentication.refresh_token,
+            '?accessToken=' + accessToken +
+            '&refreshToken=' + refreshToken,
+        headers: {
+            'Authorization': 'Basic ' + btoa(process.env.AUTH_SERVER_USER+':'+process.env.AUTH_SERVER_PASSWORD)
+        },
         error: {
             showErrorMessage: false,
             errorMessageText: '',

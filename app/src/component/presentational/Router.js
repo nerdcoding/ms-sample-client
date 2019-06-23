@@ -61,7 +61,7 @@ const Router = ({authentication, logout}) => {
                         <Route path='/home' component={HomePage} />
                         <PrivateRoute path='/about' component={AboutPage} authentication={authentication}  />
                         <Route path='/logout' render={() => {
-                            logout(authentication);
+                            logout(authentication.access_token, authentication.refresh_token);
                             return (<Redirect to='/' />)
                         }} />
                         <Redirect to="/home" />
